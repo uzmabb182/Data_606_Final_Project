@@ -1,0 +1,90 @@
+---
+title: "Census Data - Web API"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r}
+library(tidycensus)
+library(tidyverse)
+library(dplyr)
+library(plotly)
+
+```
+
+```{r}
+Sys.setenv(census_api_key = "f7ce5a76ddf2088c73fda9c0a87410995cebbffa")
+Sys.getenv("census_api_key")
+```
+
+
+# Access the API key
+# Save the Census API key in the environmental variable.
+```{r}
+census_api_key("YOUR KEY GOES HERE", install = TRUE)
+```
+
+```{r}
+Sys.getenv("census_api_key")
+```
+
+
+```{r}
+# https://api.census.gov/data/2019/acs/acs1?get=NAME,B01001_001E&for=county:*
+
+nj_wide <- get_acs(
+  geography = "county",
+  state = "NJ",
+  variables = c(population = "B01003_001E",
+                median_age = "B01002_001E",
+                household_income = "B19013_001E",
+                per_capita_income = "B19301_001E",
+                poverty_count = "B17001_002E",
+                unemployment_count = "B23025_005E"
+                ),
+  output = "wide",
+  year = 2020
+)
+
+nj_wide
+```
+# Checking the working directory path and exporting data frame into a CSV file
+```{r}
+# Get working directory path
+path <- getwd()
+
+path
+
+```
+
+```{r}
+housing_df <- read_csv( file = "C:/Users/Uzma/CUNY_SPS_PROJECTS/Data_606_Final_Project/rdc_Inventory_core_metrics_county.csv")
+```
+
+```{r}
+head(housing_df)
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
