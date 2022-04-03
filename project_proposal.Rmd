@@ -54,6 +54,8 @@ results_df
 ### were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured.
 ### The objective is to compare the performance of Pymaceuticals' drug of interest, Capomulin, versus the other treatment regimens 
 ### and find out which treatment is most effective.
+### Null Hyothesis: There is no difference on the results of drug treatment regimens.
+### Alternate Hyothesis: Capomulin does impact the results and is effective in the treatment of SCC tumor growth.
 ```
 
 # Cases
