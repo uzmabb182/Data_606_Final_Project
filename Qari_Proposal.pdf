@@ -50,7 +50,6 @@ results_df
 ### and find out which treatment is most effective.
 ### Null Hyothesis: There is no difference on the results of drug treatment regimens.
 ### Alternate Hyothesis: Capomulin does impact the results and is effective in the treatment of SCC tumor growth.
-### Also perform some kind of regression if possible.
 ```
 
 # Cases
