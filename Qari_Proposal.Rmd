@@ -5,10 +5,6 @@ output:
   pdf_document: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ---
 title: "DATA 606 Data Project Proposal"
 output: html_document
@@ -49,64 +45,62 @@ results_df <- read.delim("https://raw.githubusercontent.com/rfpoulos/pymaceutica
 results_df
 ```
 
-### Research question
+Introduction: Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals.They have provided the data to test the efficacy of potential drug treatments for squamous cell carcinoma. In this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor growth, kind of skin cancer, were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured.The objective is to analyze the data to show how four treatments (Capomulin, Infubinol, Ketapril, and Placebo) compare.
 
+
+### Research question:
 ### You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
 
-In this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor growth, kind of skin cancer,  
-were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured.
-The objective is to compare the performance of Pymaceuticals' drug of interest, Capomulin, versus the other treatment regimens 
-and find out which treatment is most effective.
+Answer: Is Capomulin more effective than the three other drug in the dataset? Is there a correlation between the age, weight and the effectiveness of capomulin?
 
-Null Hyothesis: There is no difference on the results of drug treatment regimens.
+Null Hyothesis: There is no difference between the effectiveness of the four drug regimens.
 
 Alternate Hyothesis: Capomulin does impact the results and is effective in the treatment of SCC tumor growth.
 
 Also perform some kind of regression if possible.
 
 
-### Cases
+### Cases:
+### What are the cases? How many different drug treatments are there? How many total sample size as well as the sample size by drug treatments are there?
 
-###What are the cases, and how many are there?
-
-There are 249 unique mouse id and so are the number of cases that treated with variety if drug regimem.
-Therefore there are 249 row count in the metadata_df
-The results_df dataset holds the tumor growth measurments observed for each Mouse ID and carries 1,893 rows results.
+Answer: The metadata_df contain 249 unique mouse id and so are the number of cases that treated with variety of drug regimem .The results_df dataset holds the tumor growth measurments observed for each Mouse ID and carries 1,893 rows results. There are 10 different drug treatments.
 
 
-### Data collection
-
+### Data collection:
 ### Describe the method of data collection.
 
-Data must be collected by the Pymaceutical company. But I do not have the source of the data.
-I got it from github.
+Answer: Data is collected by the fictitious pharmaceutical company who was testing the efficacy of potential drug treatments for squamous cell carcinoma.
+I import the data into my .Rmd file from github.
 
 
-### Type of study
+### Type of study:
 ### What type of study is this (observational/experiment)?
 
-This is a experimental study.
+Answer: This is a experimental study.A group of 249 mice were monitored after administration of a variety of drug regimens over a 45-day treatment period. The impact of Capomulin on tumor growth, metastasis and survival rates were monitored, along with Infubinol, Ketapril, and Placebo.
 
 
-### Data Source
+### Data Source:
 ### If you collected the data, state self-collected. If not, provide a citation/link.
 
-Data is collected from GitHub Repsitory from the following links:
+Answer: The citation and data collection links are as follows. 
+
+citation/link: https://c-l-nguyen.github.io/web-design-challenge/
+
 https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Mouse_metadata.csv
 https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Study_results.csv
 
 ### Response
 ### What is the response variable, and what type is it (numerical/categorical)?
 
-The response variable is the size of tumor, "Tumor.Volume..mm3." and it holds a numerical data.
+Answer: The response variable is the size of tumor, "Tumor.Volume..mm3." and it holds a numerical data.
 
 ### Explanatory
 
 What is the explanatory variable, and what type is it (numerical/categorical)?
 
-The explanatory variable is the "Drug.Regimen" and it holds a categorical data and "Timepoint" which holds numerical data
+Answer: The explanatory variable is the "Drug.Regimen" and it holds a categorical data and "Timepoint" which holds numerical data. The 'Timepoint' unit is 'days'.
 
-### Relevant summary statistics
+### Relevant summary statistics: (Tables and Charts)
 
 Provide summary statistics relevant to your research question. For example, 
 if you’re comparing means across groups provide means, SDs, sample sizes of each group. 
@@ -132,6 +126,18 @@ nrow(metadata_df)
 
 ```{r}
 nrow(results_df)
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
 ```
 
 ### Histogram of Tumor Size
