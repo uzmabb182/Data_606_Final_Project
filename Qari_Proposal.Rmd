@@ -230,13 +230,107 @@ stats_df
 ```
 ### Filter by four drug of interest(Capomulin, Infubinol, Ketapril, and Placebo)
 
-
+### Drug_Regimen == "Capomulin"
 
 ```{r}
+data_t <- stats_df %>% filter(Drug_Regimen == "Capomulin")
+
+
+ data_t2 <- data_t %>%
+
+  pivot_longer(cols = c(2:5),
+
+               names_to = "Variable",
+
+               values_to = "Value")
+
+ 
+
+p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
+
+  geom_bar(stat = "identity", fill="lightblue") + coord_flip() + theme_dark()
+
+p
+ 
+
+
 
 
 ```
 
+### Drug_Regimen == "Infubinol"
+
+```{r}
+data_t <- stats_df %>% filter(Drug_Regimen == "Infubinol")
+
+
+ data_t2 <- data_t %>%
+
+  pivot_longer(cols = c(2:5),
+
+               names_to = "Variable",
+
+               values_to = "Value")
+
+ 
+
+p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
+
+  geom_bar(stat = "identity", fill="lightgreen") + coord_flip() + theme_dark()
+
+p
+```
+
+### Drug_Regimen == "Ketapril"
+
+```{r}
+data_t <- stats_df %>% filter(Drug_Regimen == "Ketapril")
+
+
+ data_t2 <- data_t %>%
+
+  pivot_longer(cols = c(2:5),
+
+               names_to = "Variable",
+
+               values_to = "Value")
+
+ 
+
+p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
+
+  geom_bar(stat = "identity", fill="pink") + coord_flip() + theme_dark()
+
+p
+```
+
+### Drug_Regimen == "Placebo"
+
+
+```{r}
+data_t <- stats_df %>% filter(Drug_Regimen == "Placebo")
+
+
+ data_t2 <- data_t %>%
+
+  pivot_longer(cols = c(2:5),
+
+               names_to = "Variable",
+
+               values_to = "Value")
+
+ 
+
+p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
+
+  geom_bar(stat = "identity", fill="purple") + coord_flip() + theme_dark()
+
+p
+```
+
+
+
+### Finding the count of each Drug
 
 ```{r}
 count_df <- df1 %>% count(Drug_Regimen)
