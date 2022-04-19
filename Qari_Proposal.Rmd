@@ -230,20 +230,11 @@ stats_df
 ```
 ### Filter by four drug of interest(Capomulin, Infubinol, Ketapril, and Placebo)
 
+
+
 ```{r}
 
 
-colnames(stats_df) <- stats_df$Drug_Regimen
-rownames(stats_df) <- stats_df$Tumor_Volume_mean
-
-
-# Get the stacked barplot
-barplot(data, 
-        col=colors()[c(23,89,12)] , 
-        border="white", 
-        space=0.04, 
-        font.axis=2, 
-        xlab="group")
 ```
 
 
@@ -311,8 +302,7 @@ capomulin_df
 
 
 ```{r}
-ggplot(capomulin_df, aes(y=Timepoint, x=Tumor_Volume_mm3)) +
-  geom_bar(position='dodge', stat='identity')
+
 ```
 
 
