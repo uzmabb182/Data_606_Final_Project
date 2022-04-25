@@ -1,8 +1,8 @@
 ---
 title: "Data 606 - Final Project"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ---
@@ -30,19 +30,21 @@ library(ggplot2)
 
 ```{r }
 metadata_df <- read.delim("https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Mouse_metadata.csv", header=T, sep=",")
-metadata_df
+head(metadata_df)
 ```
 ### Grouping by Drug.Regimen
 
 ```{r}
-metadata_df %>%
+df <- metadata_df %>%
   group_by(Drug.Regimen) 
+
+head(df)
 ```
 ### Load dataset2
 
 ```{r}
 results_df <- read.delim("https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Study_results.csv", header=T, sep=",")
-results_df
+head(results_df)
 ```
 
 Introduction: Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals.They have provided the data to test the efficacy of potential drug treatments for squamous cell carcinoma. In this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor growth, kind of skin cancer, were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured.The objective is to analyze the data to show how four treatments (Capomulin, Infubinol, Ketapril, and Placebo) compare.
@@ -91,6 +93,7 @@ Answer: This is a experimental study.A group of 249 mice were monitored after ad
 Answer: The citation and data collection links are as follows. 
 
 citation/link: https://c-l-nguyen.github.io/web-design-challenge/
+https://jillcowan.github.io/Pymaceuticals/
 
 https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Mouse_metadata.csv
 https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Study_results.csv
@@ -151,7 +154,7 @@ length(drug_count)
 ```{r}
 capomulin_df <- filter(metadata_df, Drug.Regimen=="Capomulin")
 
-capomulin_df
+head(capomulin_df)
 ```
 
 ```{r}
@@ -181,25 +184,25 @@ nrow(placebo_df)
 ```{r}
 merge_df <- merge(x = metadata_df, y = results_df, all = TRUE)
 
-merge_df
+head(merge_df)
 ```
 
 ```{r}
 glimpse(merge_df)
 ```
 
-###Dropping the NA rows
+### Dropping the NA rows
 
 ```{r}
 merge_df <- merge_df %>% drop_na()
 
-merge_df
+head(merge_df)
 ```
 
 
 ### Change colnames of some columns
-# assigning new names to the columns of the merged data frame
-olnames(df)[2] <- "new_col2"
+### assigning new names to the columns of the merged data frame
+### Colnames(df)[2] <- "new_col2"
 
 ```{r}
 colnames(merge_df)[1] <- c("Mouse_Id")
@@ -208,19 +211,21 @@ colnames(merge_df)[5] <- c("Weight_g")
 colnames(merge_df)[7] <- c("Tumor_Volume_mm3")
 colnames(merge_df)[8] <- c("Metastatic_Sites")
 
-merge_df
+head(merge_df)
 ```
 
 ```{r}
 merge_df %>% group_by(Mouse_Id, Timepoint)
 
-view(merge_df)
+head(merge_df)
 ```
 
+
 ```{r}
-df1 <- select(merge_df, Drug_Regimen, Tumor_Volume_mm3)
+df1 <- select(merge_df, Drug_Regimen, Tumor_Volume_mm3, Age_months, Weight_g)
 df1
 ```
+
 ```{r}
 df1 <- group_by(df1, Drug_Regimen)
 df1
@@ -232,109 +237,31 @@ df1
 stats_df <- df1 %>% summarise(
   Tumor_Volume_mean = mean(Tumor_Volume_mm3), Tumor_Volume_median = median(Tumor_Volume_mm3), Tumor_Volume_sd = sd(Tumor_Volume_mm3), Tumor_Volume_se = sd(Tumor_Volume_mm3)/sqrt(length((Tumor_Volume_mm3))))
 
-stats_df
+head(stats_df)
 ```
-### Filter by four drug of interest(Capomulin, Infubinol, Ketapril, and Placebo)
 
-### Drug_Regimen == "Capomulin"
+### Comparing means of tumor size by drug treatment.
 
 ```{r}
-data_t <- stats_df %>% filter(Drug_Regimen == "Capomulin")
+library(ggplot2)
 
-
- data_t2 <- data_t %>%
-
-  pivot_longer(cols = c(2:5),
-
-               names_to = "Variable",
-
-               values_to = "Value")
-
- 
-
-p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
-
-  geom_bar(stat = "identity", fill="lightblue") + coord_flip() + theme_dark()
-
-p
- 
-
-
-
-
+# plot mean salaries
+ggplot(stats_df, 
+       aes(x = Drug_Regimen, 
+           y = Tumor_Volume_mean)) +
+  geom_bar(stat = "identity",  fill = "cornflowerblue")
 ```
 
-### Drug_Regimen == "Infubinol"
+### Side-by-side box plots are very useful for comparing groups (i.e., the levels of a categorical variable) on a numerical variable. Outliers are prominent for Drug_Regimen Capomulin, Propriva, Ramicane and Stelasyn.  
 
 ```{r}
-data_t <- stats_df %>% filter(Drug_Regimen == "Infubinol")
+ggplot(merge_df, 
+       aes(x = Drug_Regimen, 
+           y = Tumor_Volume_mm3)) +
+  geom_boxplot() +
+  labs(title = "Mean distribution by Drug_Regimen")
 
-
- data_t2 <- data_t %>%
-
-  pivot_longer(cols = c(2:5),
-
-               names_to = "Variable",
-
-               values_to = "Value")
-
- 
-
-p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
-
-  geom_bar(stat = "identity", fill="lightgreen") + coord_flip() + theme_dark()
-
-p
 ```
-
-### Drug_Regimen == "Ketapril"
-
-```{r}
-data_t <- stats_df %>% filter(Drug_Regimen == "Ketapril")
-
-
- data_t2 <- data_t %>%
-
-  pivot_longer(cols = c(2:5),
-
-               names_to = "Variable",
-
-               values_to = "Value")
-
- 
-
-p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
-
-  geom_bar(stat = "identity", fill="pink") + coord_flip() + theme_dark()
-
-p
-```
-
-### Drug_Regimen == "Placebo"
-
-
-```{r}
-data_t <- stats_df %>% filter(Drug_Regimen == "Placebo")
-
-
- data_t2 <- data_t %>%
-
-  pivot_longer(cols = c(2:5),
-
-               names_to = "Variable",
-
-               values_to = "Value")
-
- 
-
-p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
-
-  geom_bar(stat = "identity", fill="purple") + coord_flip() + theme_dark()
-
-p
-```
-
-
 
 ### Finding the count of each Drug
 
@@ -358,23 +285,13 @@ treemap(count_df,
 ```
 
 
-### To view the complete dataset
-
-```{r}
-
-view(merge_df)
-
-```
-
-
-
 ### remove duplicate rows across entire data frame
 
 ```{r}
 
 merge_df <- merge_df[!duplicated(merge_df), ]
 
-merge_df
+head(merge_df)
 ```
 
 ### filter by Capomulin, Infubinol, Ketapril, and Placebo
@@ -387,20 +304,43 @@ ketapril_df <- filter(merge_df, Drug_Regimen == "Ketapril")
 placebo_df <- filter(merge_df, Drug_Regimen == "Placebo")
 
 
-capomulin_df
+head(capomulin_df)
 ```
+
+
+### Since the research question is about correlations, plotting correlation matrices with all the relevant variables
+
+### capomulin_df Vs Age_months
 
 ```{r}
-arrange(capomulin_df, Timepoint)
+
+# Creating the plot
+plot(capomulin_df$Age_months, capomulin_df$Tumor_Volume_mm3, pch = 19, col = "lightblue")
+
+# Regression line
+#abline(lm(ketapril_df$Tumor_Volume_mm3 ~ ketapril_df$Age_months), col = "red", lwd = 3)
+
+# Pearson correlation
+text(paste("Correlation:", round(cor(capomulin_df$Age_months, capomulin_df$Tumor_Volume_mm3), 2)), x = 25, y = 95)
 ```
+
+### capomulin_df Vs Weight_g
 
 ```{r}
-capomulin_df <- group_by(capomulin_df, Timepoint)
 
-capomulin_df
+# Creating the plot
+plot(capomulin_df$Weight_g, capomulin_df$Tumor_Volume_mm3, pch = 19, col = "lightblue")
+
+# Regression line
+#abline(lm(ketapril_df$Tumor_Volume_mm3 ~ ketapril_df$Age_months), col = "red", lwd = 3)
+
+# Pearson correlation
+text(paste("Correlation:", round(cor(capomulin_df$Weight_g, capomulin_df$Tumor_Volume_mm3), 2)), x = 25, y = 95)
 ```
 
+### Correlation Matrix
 
-
-
+```{r}
+pairs(capomulin_df[,4:7], pch = 19)
+```
 
