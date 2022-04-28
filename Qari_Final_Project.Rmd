@@ -742,6 +742,45 @@ plac_df1
 ```
 
 ```{r}
-capo_df1 %>% full_join(plac_df1)
+df1 <- capo_df1 %>% full_join(plac_df1)
+
+df1 <- select(df1, Drug_Regimen, Tumor_Volume_mm3)
+df1
+```
+
+### Compute some summary statistics by groups: mean and sd (standard deviation)
+
+```{r}
+
+df1 %>%
+  group_by(Drug_Regimen) %>%
+  get_summary_stats(Tumor_Volume_mm3, type = "mean_sd")
+
+```
+
+### Calculations:
+R computes the Welch t-test, where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom. 
+
+```{r}
+t_result <- t.test(Tumor_Volume_mm3 ~ Drug_Regimen, data = df1)
+
+t_result
+```
+
+In the result above:
+
+t is the t-test statistic value (t = -19.993),
+df is the degrees of freedom (df= 290.56),
+p-value is the significance level of the t-test (p-value = 2.2e-16).
+conf.int is the confidence interval of the means difference at 95% (conf.int = [-14.67285 -12.04283]);
+sample estimates is the mean value of the sample (mean =  40.67574, 54.03358).
+
+### Using the rstatix package:
+
+```{r}
+stat.test <- df1 %>% 
+  t_test(Tumor_Volume_mm3 ~ Drug_Regimen, detailed = TRUE) %>%
+  add_significance()
+stat.test
 ```
 
