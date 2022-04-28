@@ -71,7 +71,6 @@ Approach for answering the research question will be:
 
 3- Perform Hypothesis testing 
 
-
 ### Cases:
 ### What are the cases? How many different drug treatments are there? How many total sample size as well as the sample size by drug treatments are there?
 
@@ -664,4 +663,85 @@ pairs(plac_df[,2:5], pch = 19, col = "lightblue")
 From the plots above, there seems a correlation between weight and Tumor size for capomulin drug regimen but will be checked by calculating the correlation coefficient.
 
 
+
+Hypothesis Testing for Capomulin drug regimen:
+
+sample size(n) = 25, sample Tumor size mean(xbar) =  36.67 mm3, standard devation  = 5.71 mm3
+
+### Step 1: Formulate Hypothesis
+
+Null hypothesis: There is no difference between the effectiveness of the four drug regimens. In other words, the mean of the size of Tumor for Capomulin drug regimen result is the same as Placebo. 
+
+Null Hypothesis H^0: mu = 60.51
+Alternate Hypothesis: mu != 60.51
+
+It is a Two Tailed test. The claim is that the population mean is equal to mm3.
+So you reject the claim if the sample mean is way above 60.51mm3 or way below 60.51mm3
+
+### Step 2: Calculate the t_statistics
+
+Here you translate this test on to t_ distribution by calculating the t_statistics
+
+t_statistic = xbar-mu/s/square root of n
+
+
+### loading the following required packages:
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+```
+
+### Two-sample t-test
+The two-sample t-test is also known as the independent t-test. The independent samples t-test comes in two different forms:
+
+the standard Student’s t-test, which assumes that the variance of the two groups are equal.
+the Welch’s t-test, which is less restrictive compared to the original Student’s test. This is the test where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom.
+
+### Preparing Data for calculating t-statistics
+
+```{r}
+
+capo_df1 <- select(capomulin_df, Mouse_Id, Drug_Regimen, Timepoint, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id) %>%
+  filter(Timepoint == max(Timepoint, na.rm=TRUE))
+
+head(capo_df1)
+```
+### To select the specific columns capo_df1
+
+```{r}
+capo_df1 <- select(capomulin_df, Mouse_Id, Drug_Regimen, Tumor_Volume_mm3)
+
+head(capo_df1)
+```
+
+```{r}
+
+plac_df1 <- select(placebo_df, Mouse_Id, Timepoint, Drug_Regimen, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id) %>%
+  filter(Timepoint == max(Timepoint, na.rm=TRUE))
+
+head(plac_df1)
+```
+
+```{r}
+plac_df1 <- select(placebo_df, Mouse_Id, Drug_Regimen, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id)
+
+head(plac_df1)
+```
+### To select the specific columns plac_df1
+
+```{r}
+
+plac_df1 <- select(placebo_df, Drug_Regimen, Tumor_Volume_mm3)
+
+plac_df1
+
+```
+
+```{r}
+capo_df1 %>% full_join(plac_df1)
+```
 
