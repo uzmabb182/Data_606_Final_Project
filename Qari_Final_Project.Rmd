@@ -658,47 +658,74 @@ text(paste("Correlation:", round(cor(plac_df$Average_weight, plac_df$Tumor_Volum
 pairs(plac_df[,2:5], pch = 19, col = "lightblue")
 ```
 
-### Conclusion:
-
 From the plots above, there seems a correlation between weight and Tumor size for capomulin drug regimen but will be checked by calculating the correlation coefficient.
 
 
+## loading the following required packages:
 
-Hypothesis Testing for Capomulin drug regimen:
-
-sample size(n) = 25, sample Tumor size mean(xbar) =  36.67 mm3, standard devation  = 5.71 mm3
-
-### Step 1: Formulate Hypothesis
-
-Null hypothesis: There is no difference between the effectiveness of the four drug regimens. In other words, the mean of the size of Tumor for Capomulin drug regimen result is the same as Placebo. 
-
-Null Hypothesis H^0: mu = 60.51
-Alternate Hypothesis: mu != 60.51
-
-It is a Two Tailed test. The claim is that the population mean is equal to mm3.
-So you reject the claim if the sample mean is way above 60.51mm3 or way below 60.51mm3
-
-### Step 2: Calculate the t_statistics
-
-Here you translate this test on to t_ distribution by calculating the t_statistics
-
-t_statistic = xbar-mu/s/square root of n
-
-
-### loading the following required packages:
 ```{r}
 library(tidyverse)
 library(ggpubr)
 library(rstatix)
+library(tidyverse)
+library(infer)
+library(moonBook)
+library(webr)
 ```
 
-### Two-sample t-test
-The two-sample t-test is also known as the independent t-test. The independent samples t-test comes in two different forms:
+### Pearson correlation (r)
 
-the standard Student’s t-test, which assumes that the variance of the two groups are equal.
-the Welch’s t-test, which is less restrictive compared to the original Student’s test. This is the test where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom.
+which measures a linear dependence between two variables (x and y). It’s also known as a parametric correlation test because it depends to the distribution of the data. It can be used only when x and y are from normal distribution. The plot of y = f(x) is named the linear regression curve.
 
-### Preparing Data for calculating t-statistics
+cor() computes the correlation coefficient
+cor.test() test for association/correlation between paired samples. It returns both the correlation coefficient and the significance level(or p-value) of the correlation .
+
+
+```{r}
+cor(capo_df$Tumor_Volume_mm3, capo_df$Average_weight, method = c("pearson", "kendall", "spearman"))
+cor.test(capo_df$Tumor_Volume_mm3, capo_df$Average_weight, method=c("pearson", "kendall", "spearman"))
+```
+
+ ### Visualizing the Data:
+ 
+```{r}
+
+ggscatter(capo_df, x = "Tumor_Volume_mm3", y = "Average_weight", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Tumor Size mm3", ylab = "Average Weight")
+```
+ 
+R is a measure of any linear trend between two variables. The value of r ranges between −1 and 1
+
+From the plot above, the value of R=0.88 shows strong linear relationship.
+
+# Answer Research Question:
+
+
+### Testing the correlation between average age and Tumor size for ketapril drug regimen:
+
+Correlation test is performed to evaluate the association between two or more variables.
+
+keta_df$Average_age, keta_df$Tumor_Volume_mm3
+```{r}
+cor(keta_df$Tumor_Volume_mm3, keta_df$Average_age, method = c("pearson", "kendall", "spearman"))
+cor.test(keta_df$Tumor_Volume_mm3, keta_df$Average_age, method=c("pearson", "kendall", "spearman"))
+```
+ ### Visualizing the Data:
+ 
+```{r}
+
+ggscatter(keta_df, x = "Tumor_Volume_mm3", y = "Average_age", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Tumor Size mm3", ylab = "Average Age")
+```
+R is a measure of any linear trend between two variables. The value of r ranges between −1 and 1
+
+From the plot above, the value of R=0.28 shows week linear relationship.
+
+### Preparing Data for Capomulin and Placebo Statistical analysis
 
 ```{r}
 
@@ -707,7 +734,9 @@ capo_df1 <- select(capomulin_df, Mouse_Id, Drug_Regimen, Timepoint, Tumor_Volume
   filter(Timepoint == max(Timepoint, na.rm=TRUE))
 
 head(capo_df1)
+
 ```
+
 ### To select the specific columns capo_df1
 
 ```{r}
@@ -731,15 +760,18 @@ plac_df1 <- select(placebo_df, Mouse_Id, Drug_Regimen, Tumor_Volume_mm3) %>%
 
 head(plac_df1)
 ```
+
 ### To select the specific columns plac_df1
 
 ```{r}
 
 plac_df1 <- select(placebo_df, Drug_Regimen, Tumor_Volume_mm3)
 
-plac_df1
+head(plac_df1)
 
 ```
+
+### Joining the two drug regemin datasets
 
 ```{r}
 df1 <- capo_df1 %>% full_join(plac_df1)
@@ -758,7 +790,83 @@ df1 %>%
 
 ```
 
+### There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test.
+
+
+
+# Hypothesis Testing for Capomulin drug regimen:
+
+sample size(n) = 25, sample Tumor size mean(xbar) =  36.67 mm3, standard devation  = 5.71 mm3
+
+### Step 1: Formulate Hypothesis
+
+Null hypothesis: There is no difference between the effectiveness of the four drug regimens. In other words, the difference in mean of the size of Tumor for Capomulin drug regimen result Placebo is zero. 
+
+Null Hypothesis H^0: mu = 54.034
+Alternate Hypothesis: mu != 54.034
+
+It is a Two Tailed test.
+
+```{r}
+obs_diff <- df1 %>%
+  specify(Tumor_Volume_mm3 ~ Drug_Regimen) %>%
+  calculate(stat = "diff in means", order = c("Capomulin", "Placebo"))
+
+obs_diff
+```
+
+### To simulate the test on the null distribution, which we will save as null
+
+```{r}
+null_dist <- df1 %>%
+  specify(Tumor_Volume_mm3 ~ Drug_Regimen) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("Capomulin", "Placebo"))
+
+head(null_dist)
+```
+
+### visualize this null distribution 
+
+```{r}
+ggplot(data = null_dist, aes(x = stat)) +
+  geom_histogram()
+```
+
+
+### Before performing a t-test, you have to compare two variances.
+
+### F test to compare two variances:
+
+```{r}
+x=var.test(Tumor_Volume_mm3 ~ Drug_Regimen, data = df1)
+x
+```
+
+```{r}
+
+plot(x)
+```
+
+
+### Step 2: Calculate the t_statistics
+
+Here you translate this test on to t_ distribution by calculating the t_statistics
+
+t_statistic = xbar-mu/s/square root of n
+
+
+### Two-sample t-test:
+
+The two-sample t-test is also known as the independent t-test. The independent samples t-test comes in two different forms:
+
+the standard Student’s t-test, which assumes that the variance of the two groups are equal.
+the Welch’s t-test, which is less restrictive compared to the original Student’s test. This is the test where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom.
+
+
 ### Calculations:
+
 R computes the Welch t-test, where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom. 
 
 ```{r}
@@ -767,7 +875,12 @@ t_result <- t.test(Tumor_Volume_mm3 ~ Drug_Regimen, data = df1)
 t_result
 ```
 
-In the result above:
+```{r}
+plot(t_result)
+```
+
+
+### In the result above:
 
 t is the t-test statistic value (t = -19.993),
 df is the degrees of freedom (df= 290.56),
@@ -775,12 +888,40 @@ p-value is the significance level of the t-test (p-value = 2.2e-16).
 conf.int is the confidence interval of the means difference at 95% (conf.int = [-14.67285 -12.04283]);
 sample estimates is the mean value of the sample (mean =  40.67574, 54.03358).
 
-### Using the rstatix package:
+the t-statistic, t = -19.993, 
 
-```{r}
-stat.test <- df1 %>% 
-  t_test(Tumor_Volume_mm3 ~ Drug_Regimen, detailed = TRUE) %>%
-  add_significance()
-stat.test
-```
+### Meaning of translating the hypothesis test on to the t_statistics:
+
+sample mean of Capomulin = 40.67574 is way above the sample mean in group Placebo = 54.034 is equivalent to translating that the t-statistics of -19.993 is way above 0.
+
+Similarly sample mean of Capomulin = 40.67574 is way below the sample mean in group Placebo = 54.034 is equivalent to translating that the t-statistics of -19.993 is way below 0.
+
+### Step 3: Determine the Cutoff values for the t_statistics.
+
+So that we can identify the rejection region for the hypothesis testing.
+
+This is done by first specifying the value of alpha which in the context of hypothesis test aka significance level
+
+Typically the value of alpha=0.05 or 0.01 corresponding to 95% or 99% confidence respectively.
+
+
+So, our cutoff values for the t-statistic, denoted by t cutoff, are those values in the t distribution, with n- 1 degrees of freedom, that cut off, alpha/2 probability to the right, and alpha/2 probability to the left.
+
+This is a two-tail test with one rejection region on the right, and one rejection region on the left.
+
+Hence, the total rejection probability of alpha gets equally divided across the two rejection regions.
+
+### Step 4: Check whether t_statistics falls in the rejection region
+
+### Interpretation:
+
+Hypothesis testing ultimately uses a p-value to weigh the strength of the evidence or in other words what the data are about the population. The p-value ranges between 0 and 1. It can be interpreted in the following way:
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis, so you reject it.
+A large p-value (> 0.05) indicates weak evidence against the null hypothesis, so you fail to reject it.
+
+The p-value of the test is 2.2e-16, which is less than the significance level alpha = 0.05. We can conclude that camopulin average tumor size is significantly different from placebo average tumor size with a p-value = 2.2e-16.
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis,
+so we reject the null hypothsisis and accept the alternate hypothesis.
 
