@@ -1,8 +1,8 @@
 ---
 title: "Data 606 - Final Project"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ---
@@ -661,6 +661,8 @@ pairs(plac_df[,2:5], pch = 19, col = "lightblue")
 From the plots above, there seems a correlation between weight and Tumor size for capomulin drug regimen but will be checked by calculating the correlation coefficient.
 
 
+# Answer the Research Question:
+
 ## loading the following required packages:
 
 ```{r}
@@ -700,8 +702,6 @@ R is a measure of any linear trend between two variables. The value of r ranges 
 
 From the plot above, the value of R=0.88 shows strong linear relationship.
 
-# Answer Research Question:
-
 
 ### Testing the correlation between average age and Tumor size for ketapril drug regimen:
 
@@ -712,7 +712,8 @@ keta_df$Average_age, keta_df$Tumor_Volume_mm3
 cor(keta_df$Tumor_Volume_mm3, keta_df$Average_age, method = c("pearson", "kendall", "spearman"))
 cor.test(keta_df$Tumor_Volume_mm3, keta_df$Average_age, method=c("pearson", "kendall", "spearman"))
 ```
- ### Visualizing the Data:
+
+### Visualizing the Data:
  
 ```{r}
 
@@ -724,6 +725,7 @@ ggscatter(keta_df, x = "Tumor_Volume_mm3", y = "Average_age",
 R is a measure of any linear trend between two variables. The value of r ranges between −1 and 1
 
 From the plot above, the value of R=0.28 shows week linear relationship.
+
 
 ### Preparing Data for Capomulin and Placebo Statistical analysis
 
@@ -777,7 +779,7 @@ head(plac_df1)
 df1 <- capo_df1 %>% full_join(plac_df1)
 
 df1 <- select(df1, Drug_Regimen, Tumor_Volume_mm3)
-df1
+head(df1)
 ```
 
 ### Compute some summary statistics by groups: mean and sd (standard deviation)
@@ -830,7 +832,7 @@ head(null_dist)
 ### visualize this null distribution 
 
 ```{r}
-ggplot(data = null_dist, aes(x = stat)) +
+ggplot(data = null_dist, aes(x = stat, fill = "color")) +
   geom_histogram()
 ```
 
@@ -915,12 +917,416 @@ Hence, the total rejection probability of alpha gets equally divided across the 
 
 ### Interpretation:
 
-Hypothesis testing ultimately uses a p-value to weigh the strength of the evidence or in other words what the data are about the population. The p-value ranges between 0 and 1. It can be interpreted in the following way:
+Hypothesis testing ultimately uses a p-value to weigh the strength of the evidence. The p-value ranges between 0 and 1. It can be interpreted in the following way:
 
 A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis, so you reject it.
 A large p-value (> 0.05) indicates weak evidence against the null hypothesis, so you fail to reject it.
 
 The p-value of the test is 2.2e-16, which is less than the significance level alpha = 0.05. We can conclude that camopulin average tumor size is significantly different from placebo average tumor size with a p-value = 2.2e-16.
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis,
+so we reject the null hypothsisis and accept the alternate hypothesis.
+
+### =============================================================
+
+### Now Preparing Data for ketapril and Placebo Statistical analysis
+
+```{r}
+
+keta_df1 <- select(ketapril_df, Mouse_Id, Drug_Regimen, Timepoint, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id) %>%
+  filter(Timepoint == max(Timepoint, na.rm=TRUE))
+
+head(keta_df1)
+
+```
+
+### To select the specific columns keta_df1
+
+```{r}
+keta_df1 <- select(ketapril_df, Mouse_Id, Drug_Regimen, Tumor_Volume_mm3)
+
+head(keta_df1)
+```
+
+```{r}
+
+keta_df1 <- select(ketapril_df, Mouse_Id, Timepoint, Drug_Regimen, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id) %>%
+  filter(Timepoint == max(Timepoint, na.rm=TRUE))
+
+head(keta_df1)
+```
+
+```{r}
+plac_df1 <- select(placebo_df, Mouse_Id, Drug_Regimen, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id)
+
+head(plac_df1)
+```
+
+### To select the specific columns plac_df1
+
+```{r}
+
+plac_df1 <- select(placebo_df, Drug_Regimen, Tumor_Volume_mm3)
+
+head(plac_df1)
+
+```
+
+### Joining the two drug regemin datasets
+
+```{r}
+df2 <- keta_df1 %>% full_join(plac_df1)
+
+df2 <- select(df2, Drug_Regimen, Tumor_Volume_mm3)
+head(df2)
+```
+
+### Compute some summary statistics by groups: mean and sd (standard deviation)
+
+```{r}
+
+df2 %>%
+  group_by(Drug_Regimen) %>%
+  get_summary_stats(Tumor_Volume_mm3, type = "mean_sd")
+
+```
+
+### There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test.
+
+
+
+# Hypothesis Testing for Ketapril drug regimen:
+
+sample size(n) = 25, sample Tumor size mean(xbar) =  36.67 mm3, standard devation  = 5.71 mm3
+
+### Step 1: Formulate Hypothesis
+
+Null hypothesis: There is no difference between the effectiveness of the four drug regimens. In other words, the difference in mean of the size of Tumor for Ketapril drug regimen result Placebo is zero. 
+
+Null Hypothesis H^0: mu = 54.034
+Alternate Hypothesis: mu != 54.034
+
+It is a Two Tailed test.
+
+```{r}
+obs_diff <- df2 %>%
+  specify(Tumor_Volume_mm3 ~ Drug_Regimen) %>%
+  calculate(stat = "diff in means", order = c("Ketapril", "Placebo"))
+
+obs_diff
+```
+
+### To simulate the test on the null distribution, which we will save as null
+
+```{r}
+null_dist <- df2 %>%
+  specify(Tumor_Volume_mm3 ~ Drug_Regimen) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("Ketapril", "Placebo"))
+
+head(null_dist)
+```
+
+### visualize this null distribution 
+
+```{r}
+ggplot(data = null_dist, aes(x = stat, fill = "color")) +
+  geom_histogram()
+```
+
+
+### Before performing a t-test, you have to compare two variances.
+
+### F test to compare two variances:
+
+```{r}
+x=var.test(Tumor_Volume_mm3 ~ Drug_Regimen, data = df2)
+x
+```
+
+```{r}
+
+plot(x)
+```
+
+
+### Step 2: Calculate the t_statistics
+
+Here you translate this test on to t_ distribution by calculating the t_statistics
+
+t_statistic = xbar-mu/s/square root of n
+
+
+### Two-sample t-test:
+
+The two-sample t-test is also known as the independent t-test. The independent samples t-test comes in two different forms:
+
+the standard Student’s t-test, which assumes that the variance of the two groups are equal.
+the Welch’s t-test, which is less restrictive compared to the original Student’s test. This is the test where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom.
+
+
+### Calculations:
+
+R computes the Welch t-test, where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom. 
+
+```{r}
+t_result <- t.test(Tumor_Volume_mm3 ~ Drug_Regimen, data = df2)
+
+t_result
+```
+
+```{r}
+plot(t_result)
+```
+
+
+### In the result above:
+
+t is the t-test statistic value (t = 4.2331),
+df is the degrees of freedom (df = 28.247),
+p-value is the significance level of the t-test (p-value = 0.000221).
+conf.int is the confidence interval of the means difference at 95% (conf.int = [ 4.529186 13.016035]);
+sample estimates is the mean value of the sample (mean =   62.80619, 54.03358).
+
+the t-statistic, t = 4.2331, 
+
+### Meaning of translating the hypothesis test on to the t_statistics:
+
+sample mean of Ketapril = 62.80619 is way above the sample mean in group Placebo = 54.034 is equivalent to translating that the t-statistics of 4.2331 is way above 0.
+
+Similarly sample mean of Ketapril = 62.80619 is way below the sample mean in group Placebo = 54.034 is equivalent to translating that the t-statistics of  4.2331  is way below 0.
+
+### Step 3: Determine the Cutoff values for the t_statistics.
+
+So that we can identify the rejection region for the hypothesis testing.
+
+This is done by first specifying the value of alpha which in the context of hypothesis test aka significance level
+
+Typically the value of alpha=0.05 or 0.01 corresponding to 95% or 99% confidence respectively.
+
+
+So, our cutoff values for the t-statistic, denoted by t cutoff, are those values in the t distribution, with n- 1 degrees of freedom, that cut off, alpha/2 probability to the right, and alpha/2 probability to the left.
+
+This is a two-tail test with one rejection region on the right, and one rejection region on the left.
+
+Hence, the total rejection probability of alpha gets equally divided across the two rejection regions.
+
+### Step 4: Check whether t_statistics falls in the rejection region
+
+### Interpretation:
+
+Hypothesis testing ultimately uses a p-value to weigh the strength of the evidence. The p-value ranges between 0 and 1. It can be interpreted in the following way:
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis, so you reject it.
+A large p-value (> 0.05) indicates weak evidence against the null hypothesis, so you fail to reject it.
+
+The p-value of the test is 0.000221, which is less than the significance level alpha = 0.05. We can conclude that Ketapril average tumor size is significantly different from placebo average tumor size with a p-value = 0.000221.
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis,
+so we reject the null hypothsisis and accept the alternate hypothesis.
+
+### =============================================================
+
+### Now Preparing Data for Infubinol and Placebo Statistical analysis
+
+```{r}
+
+infu_df1 <- select(infubinol_df, Mouse_Id, Drug_Regimen, Timepoint, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id) %>%
+  filter(Timepoint == max(Timepoint, na.rm=TRUE))
+
+head(infu_df1)
+
+```
+
+### To select the specific columns infu_df1
+
+```{r}
+infu_df1 <- select(infubinol_df, Mouse_Id, Drug_Regimen, Tumor_Volume_mm3)
+
+head(infu_df1)
+```
+
+```{r}
+
+infu_df1 <- select(infubinol_df, Mouse_Id, Timepoint, Drug_Regimen, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id) %>%
+  filter(Timepoint == max(Timepoint, na.rm=TRUE))
+
+head(infu_df1)
+```
+
+```{r}
+plac_df1 <- select(placebo_df, Mouse_Id, Drug_Regimen, Tumor_Volume_mm3) %>%
+  group_by(Mouse_Id)
+
+head(plac_df1)
+```
+
+### To select the specific columns plac_df1
+
+```{r}
+
+plac_df1 <- select(placebo_df, Drug_Regimen, Tumor_Volume_mm3)
+
+head(plac_df1)
+
+```
+
+### Joining the two drug regemin datasets
+
+```{r}
+df3 <- infu_df1 %>% full_join(plac_df1)
+
+df3 <- select(df3, Drug_Regimen, Tumor_Volume_mm3)
+head(df3)
+```
+
+### Compute some summary statistics by groups: mean and sd (standard deviation)
+
+```{r}
+
+df3 %>%
+  group_by(Drug_Regimen) %>%
+  get_summary_stats(Tumor_Volume_mm3, type = "mean_sd")
+
+```
+
+### There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test.
+
+
+
+# Hypothesis Testing for Infubinol drug regimen:
+
+sample size(n) = 25, sample Tumor size mean(xbar) =  36.67 mm3, standard devation  = 5.71 mm3
+
+### Step 1: Formulate Hypothesis
+
+Null hypothesis: There is no difference between the effectiveness of the four drug regimens. In other words, the difference in mean of the size of Tumor for Infubinol drug regimen result Placebo is zero. 
+
+Null Hypothesis H^0: mu = 54.034
+Alternate Hypothesis: mu != 54.034
+
+It is a Two Tailed test.
+
+```{r}
+obs_diff <- df3 %>%
+  specify(Tumor_Volume_mm3 ~ Drug_Regimen) %>%
+  calculate(stat = "diff in means", order = c("Infubinol", "Placebo"))
+
+obs_diff
+```
+
+### To simulate the test on the null distribution, which we will save as null
+
+```{r}
+null_dist <- df3 %>%
+  specify(Tumor_Volume_mm3 ~ Drug_Regimen) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("Infubinol", "Placebo"))
+
+head(null_dist)
+```
+
+### visualize this null distribution 
+
+```{r}
+ggplot(data = null_dist, aes(x = stat, fill = "color")) +
+  geom_histogram()
+```
+
+
+### Before performing a t-test, you have to compare two variances.
+
+### F test to compare two variances:
+
+```{r}
+x=var.test(Tumor_Volume_mm3 ~ Drug_Regimen, data = df3)
+x
+```
+
+```{r}
+
+plot(x)
+```
+
+
+### Step 2: Calculate the t_statistics
+
+Here you translate this test on to t_ distribution by calculating the t_statistics
+
+t_statistic = xbar-mu/s/square root of n
+
+
+### Two-sample t-test:
+
+The two-sample t-test is also known as the independent t-test. The independent samples t-test comes in two different forms:
+
+the standard Student’s t-test, which assumes that the variance of the two groups are equal.
+the Welch’s t-test, which is less restrictive compared to the original Student’s test. This is the test where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom.
+
+
+### Calculations:
+
+R computes the Welch t-test, where you do not assume that the variance is the same in the two groups, which results in the fractional degrees of freedom. 
+
+```{r}
+t_result <- t.test(Tumor_Volume_mm3 ~ Drug_Regimen, data = df3)
+
+t_result
+```
+
+```{r}
+plot(t_result)
+```
+
+
+### In the result above:
+
+t is the t-test statistic value (t = 2.2821),
+df is the degrees of freedom (df = 28.247),
+p-value is the significance level of the t-test (p-value = 0.02981).
+conf.int is the confidence interval of the means difference at 95% (conf.int = [0.4342457  7.8550843]);
+sample estimates is the mean value of the sample (mean =58.17825   54.03358).
+
+the t-statistic, t = 2.2821, 
+
+### Meaning of translating the hypothesis test on to the t_statistics:
+
+sample mean of Infubinol = 58.17825 is way above the sample mean in group Placebo = 54.034 is equivalent to translating that the t-statistics of 2.2821 is way above 0.
+
+Similarly sample mean of Infubinol = 58.17825 is way below the sample mean in group Placebo = 54.034 is equivalent to translating that the t-statistics of  2.2821  is way below 0.
+
+### Step 3: Determine the Cutoff values for the t_statistics.
+
+So that we can identify the rejection region for the hypothesis testing.
+
+This is done by first specifying the value of alpha which in the context of hypothesis test aka significance level
+
+Typically the value of alpha=0.05 or 0.01 corresponding to 95% or 99% confidence respectively.
+
+
+So, our cutoff values for the t-statistic, denoted by t cutoff, are those values in the t distribution, with n- 1 degrees of freedom, that cut off, alpha/2 probability to the right, and alpha/2 probability to the left.
+
+This is a two-tail test with one rejection region on the right, and one rejection region on the left.
+
+Hence, the total rejection probability of alpha gets equally divided across the two rejection regions.
+
+### Step 4: Check whether t_statistics falls in the rejection region
+
+### Interpretation:
+
+Hypothesis testing ultimately uses a p-value to weigh the strength of the evidence. The p-value ranges between 0 and 1. It can be interpreted in the following way:
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis, so you reject it.
+A large p-value (> 0.05) indicates weak evidence against the null hypothesis, so you fail to reject it.
+
+The p-value of the test is 0.02981, which is less than the significance level alpha = 0.05. We can conclude that Ketapril average tumor size is significantly different from placebo average tumor size with a p-value = 0.02981
 
 A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis,
 so we reject the null hypothsisis and accept the alternate hypothesis.

@@ -1,0 +1,2189 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={DATA 606 Data Project Proposal},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{DATA 606 Data Project Proposal}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{libraries-imported}{%
+\subsubsection{Libraries Imported}\label{libraries-imported}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidyverse' was built under R version 4.1.3
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.2     v dplyr   1.0.7
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'stringr' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(plotly)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'plotly' was built under R version 4.1.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'plotly'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     last_plot
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     filter
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:graphics':
+## 
+##     layout
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(psych)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'psych' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'psych'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-preparation}{%
+\subsubsection{Data Preparation}\label{data-preparation}}
+
+\hypertarget{load-dataset1}{%
+\paragraph{load dataset1}\label{load-dataset1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{metadata\_df }\OtherTok{\textless{}{-}} \FunctionTok{read.delim}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Mouse\_metadata.csv"}\NormalTok{, }\AttributeTok{header=}\NormalTok{T, }\AttributeTok{sep=}\StringTok{","}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(metadata\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse.ID Drug.Regimen    Sex Age_months Weight..g.
+## 1     k403     Ramicane   Male         21         16
+## 2     s185    Capomulin Female          3         17
+## 3     x401    Capomulin Female         16         15
+## 4     m601    Capomulin   Male         22         17
+## 5     g791     Ramicane   Male         11         16
+## 6     s508     Ramicane   Male          1         17
+\end{verbatim}
+
+\hypertarget{grouping-by-drug.regimen}{%
+\subsubsection{Grouping by
+Drug.Regimen}\label{grouping-by-drug.regimen}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ metadata\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Drug.Regimen) }
+
+\FunctionTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+## # Groups:   Drug.Regimen [2]
+##   Mouse.ID Drug.Regimen Sex    Age_months Weight..g.
+##   <chr>    <chr>        <chr>       <int>      <int>
+## 1 k403     Ramicane     Male           21         16
+## 2 s185     Capomulin    Female          3         17
+## 3 x401     Capomulin    Female         16         15
+## 4 m601     Capomulin    Male           22         17
+## 5 g791     Ramicane     Male           11         16
+## 6 s508     Ramicane     Male            1         17
+\end{verbatim}
+
+\hypertarget{load-dataset2}{%
+\subsubsection{Load dataset2}\label{load-dataset2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results\_df }\OtherTok{\textless{}{-}} \FunctionTok{read.delim}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Study\_results.csv"}\NormalTok{, }\AttributeTok{header=}\NormalTok{T, }\AttributeTok{sep=}\StringTok{","}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(results\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse.ID Timepoint Tumor.Volume..mm3. Metastatic.Sites
+## 1     b128         0                 45                0
+## 2     f932         0                 45                0
+## 3     g107         0                 45                0
+## 4     a457         0                 45                0
+## 5     c819         0                 45                0
+## 6     h246         0                 45                0
+\end{verbatim}
+
+Introduction: Pymaceuticals Inc., a fictional burgeoning pharmaceutical
+company based out of San Diego, CA, specializes in drug-based,
+anti-cancer pharmaceuticals.They have provided the data to test the
+efficacy of potential drug treatments for squamous cell carcinoma. In
+this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor
+growth, kind of skin cancer, were treated through a variety of drug
+regimens. Over the course of 45 days, tumor development was observed and
+measured.The objective is to analyze the data to show how four
+treatments (Capomulin, Infubinol, Ketapril, and Placebo) compare.
+
+\hypertarget{research-question}{%
+\subsubsection{Research question:}\label{research-question}}
+
+\hypertarget{you-should-phrase-your-research-question-in-a-way-that-matches-up-with-the-scope-of-inference-your-dataset-allows-for.}{%
+\subsubsection{You should phrase your research question in a way that
+matches up with the scope of inference your dataset allows
+for.}\label{you-should-phrase-your-research-question-in-a-way-that-matches-up-with-the-scope-of-inference-your-dataset-allows-for.}}
+
+Question 1: Is Capomulin more effective than the three other drugs in
+the dataset?
+
+Question 2: Is there a correlation between the age, weight and the
+effectiveness of capomulin?
+
+Null Hyothesis: There is no difference between the effectiveness of the
+four drug regimens.
+
+Alternate Hyothesis: Capomulin is more effective than the other three
+drug regimens on treating SCC tumor growth.
+
+Approach for answering the research question will be:
+
+1- Perform linear regression to study the correlation between various
+variables and calculating the correlation coefficient.
+
+2- And finally compare the four population against each other.
+
+3- Perform Hypothesis testing
+
+\hypertarget{cases}{%
+\subsubsection{Cases:}\label{cases}}
+
+\hypertarget{what-are-the-cases-how-many-different-drug-treatments-are-there-how-many-total-sample-size-as-well-as-the-sample-size-by-drug-treatments-are-there}{%
+\subsubsection{What are the cases? How many different drug treatments
+are there? How many total sample size as well as the sample size by drug
+treatments are
+there?}\label{what-are-the-cases-how-many-different-drug-treatments-are-there-how-many-total-sample-size-as-well-as-the-sample-size-by-drug-treatments-are-there}}
+
+Answer: The metadata\_df contain 249 unique mouse id and so are the
+number of cases that treated with variety of drug regimem .The
+results\_df dataset holds the tumor growth measurments observed for each
+Mouse ID and carries 1,893 rows results. There are 10 different drug
+treatments. The total sample size of mouse\_id for four treatments
+(Capomulin, Infubinol, Ketapril, and Placebo) is 100 and the sample size
+of mouse\_id by drug treatments is 25 each.
+
+\hypertarget{data-collection}{%
+\subsubsection{Data collection:}\label{data-collection}}
+
+\hypertarget{describe-the-method-of-data-collection.}{%
+\subsubsection{Describe the method of data
+collection.}\label{describe-the-method-of-data-collection.}}
+
+Answer: Data is collected by the fictitious pharmaceutical company who
+was testing the efficacy of potential drug treatments for squamous cell
+carcinoma. I import the data into my .Rmd file from github.
+
+\hypertarget{type-of-study}{%
+\subsubsection{Type of study:}\label{type-of-study}}
+
+\hypertarget{what-type-of-study-is-this-observationalexperiment}{%
+\subsubsection{What type of study is this
+(observational/experiment)?}\label{what-type-of-study-is-this-observationalexperiment}}
+
+Answer: This is a experimental study.A group of 249 mice were monitored
+after administration of a variety of drug regimens over a 45-day
+treatment period. The impact of Capomulin on tumor growth, metastasis
+and survival rates were monitored, along with Infubinol, Ketapril, and
+Placebo.
+
+\hypertarget{data-source}{%
+\subsubsection{Data Source:}\label{data-source}}
+
+\hypertarget{if-you-collected-the-data-state-self-collected.-if-not-provide-a-citationlink.}{%
+\subsubsection{If you collected the data, state self-collected. If not,
+provide a
+citation/link.}\label{if-you-collected-the-data-state-self-collected.-if-not-provide-a-citationlink.}}
+
+Answer: The citation and data collection links are as follows.
+
+In my search for the experimental datasets, I found the Mouse\_metadata
+and the Study\_results on the GitHub link provided below:
+
+\url{https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Mouse_metadata.csv}
+
+\url{https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Study_results.csv}
+
+Upon further research in finding the original source of the the dataset,
+I found that these datasets are provided by Pymaceuticals Inc., a
+fictional burgeoning pharmaceutical company based out of San Diego, CA,
+specializes in drug-based, anti-cancer pharmaceuticals. Below is the
+link for the original source of the datasets.
+
+\url{https://c-l-nguyen.github.io/web-design-challenge/index.html}
+
+\hypertarget{response}{%
+\subsubsection{Response}\label{response}}
+
+\hypertarget{what-is-the-response-variable-and-what-type-is-it-numericalcategorical}{%
+\subsubsection{What is the response variable, and what type is it
+(numerical/categorical)?}\label{what-is-the-response-variable-and-what-type-is-it-numericalcategorical}}
+
+Answer: The response variable is the size of tumor,
+``Tumor.Volume..mm3.'' and it holds a numerical data.
+
+\hypertarget{explanatory}{%
+\subsubsection{Explanatory}\label{explanatory}}
+
+What is the explanatory variable, and what type is it
+(numerical/categorical)?
+
+Answer: The explanatory variable is the ``Drug.Regimen'' and it holds a
+categorical data and ``Timepoint'' which holds numerical data. The
+`Timepoint' unit is `days'.
+
+\hypertarget{relevant-summary-statistics-tables-and-charts}{%
+\subsubsection{Relevant summary statistics: (Tables and
+Charts)}\label{relevant-summary-statistics-tables-and-charts}}
+
+Provide summary statistics relevant to your research question. For
+example, if you're comparing means across groups provide means, SDs,
+sample sizes of each group. This step requires the use of R, hence a
+code chunk is provided below. Insert more code chunks as needed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(metadata\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Mouse.ID         Drug.Regimen           Sex              Age_months   
+##  Length:249         Length:249         Length:249         Min.   : 1.00  
+##  Class :character   Class :character   Class :character   1st Qu.: 6.00  
+##  Mode  :character   Mode  :character   Mode  :character   Median :13.00  
+##                                                           Mean   :12.73  
+##                                                           3rd Qu.:19.00  
+##                                                           Max.   :24.00  
+##    Weight..g.   
+##  Min.   :15.00  
+##  1st Qu.:25.00  
+##  Median :27.00  
+##  Mean   :26.12  
+##  3rd Qu.:29.00  
+##  Max.   :30.00
+\end{verbatim}
+
+\hypertarget{summary-statistic}{%
+\subsubsection{Summary Statistic}\label{summary-statistic}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(results\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Mouse.ID           Timepoint     Tumor.Volume..mm3. Metastatic.Sites
+##  Length:1893        Min.   : 0.00   Min.   :22.05      Min.   :0.000   
+##  Class :character   1st Qu.: 5.00   1st Qu.:45.00      1st Qu.:0.000   
+##  Mode  :character   Median :20.00   Median :48.95      Median :1.000   
+##                     Mean   :19.57   Mean   :50.45      Mean   :1.022   
+##                     3rd Qu.:30.00   3rd Qu.:56.29      3rd Qu.:2.000   
+##                     Max.   :45.00   Max.   :78.57      Max.   :4.000
+\end{verbatim}
+
+\hypertarget{sample-sizes-for-metadata_df}{%
+\subsubsection{Sample Sizes for
+metadata\_df}\label{sample-sizes-for-metadata_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(metadata\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 249
+\end{verbatim}
+
+\hypertarget{sample-sizes-for-results_df}{%
+\subsubsection{Sample Sizes for
+results\_df}\label{sample-sizes-for-results_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(results\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1893
+\end{verbatim}
+
+\hypertarget{how-many-drug-treatments-are-there}{%
+\subsubsection{How many drug treatments are
+there?}\label{how-many-drug-treatments-are-there}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{drug\_count }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(metadata\_df}\SpecialCharTok{$}\NormalTok{Drug.Regimen)}
+
+\NormalTok{drug\_count}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Ramicane"  "Capomulin" "Infubinol" "Placebo"   "Ceftamin"  "Stelasyn" 
+##  [7] "Zoniferol" "Ketapril"  "Propriva"  "Naftisol"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(drug\_count)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+\hypertarget{sample-sizes-of-mouse_id-by-drug-treatment}{%
+\subsubsection{Sample sizes of mouse\_id by drug
+treatment}\label{sample-sizes-of-mouse_id-by-drug-treatment}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capomulin\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(metadata\_df, Drug.Regimen}\SpecialCharTok{==}\StringTok{"Capomulin"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(capomulin\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse.ID Drug.Regimen    Sex Age_months Weight..g.
+## 1     s185    Capomulin Female          3         17
+## 2     x401    Capomulin Female         16         15
+## 3     m601    Capomulin   Male         22         17
+## 4     f966    Capomulin   Male         16         17
+## 5     u364    Capomulin   Male         18         17
+## 6     y793    Capomulin   Male         17         17
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(capomulin\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{infubinol\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(metadata\_df, Drug.Regimen}\SpecialCharTok{==}\StringTok{"Infubinol"}\NormalTok{)}
+
+\FunctionTok{nrow}\NormalTok{(infubinol\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ketapril\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(metadata\_df, Drug.Regimen}\SpecialCharTok{==}\StringTok{"Ketapril"}\NormalTok{)}
+
+\FunctionTok{nrow}\NormalTok{(ketapril\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{placebo\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(metadata\_df, Drug.Regimen}\SpecialCharTok{==}\StringTok{"Placebo"}\NormalTok{)}
+
+\FunctionTok{nrow}\NormalTok{(placebo\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25
+\end{verbatim}
+
+\hypertarget{performing-full-outer-join-so-that-no-data-is-lost}{%
+\subsubsection{Performing full outer join, so that no data is
+lost}\label{performing-full-outer-join-so-that-no-data-is-lost}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{merge\_df }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(}\AttributeTok{x =}\NormalTok{ metadata\_df, }\AttributeTok{y =}\NormalTok{ results\_df, }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(merge\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse.ID Drug.Regimen    Sex Age_months Weight..g. Timepoint
+## 1     a203    Infubinol Female         20         23        20
+## 2     a203    Infubinol Female         20         23        25
+## 3     a203    Infubinol Female         20         23        15
+## 4     a203    Infubinol Female         20         23        10
+## 5     a203    Infubinol Female         20         23        35
+## 6     a203    Infubinol Female         20         23         0
+##   Tumor.Volume..mm3. Metastatic.Sites
+## 1           55.17334                1
+## 2           56.79321                1
+## 3           52.77787                1
+## 4           51.85244                1
+## 5           61.93165                2
+## 6           45.00000                0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glimpse}\NormalTok{(merge\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 1,893
+## Columns: 8
+## $ Mouse.ID           <chr> "a203", "a203", "a203", "a203", "a203", "a203", "a2~
+## $ Drug.Regimen       <chr> "Infubinol", "Infubinol", "Infubinol", "Infubinol",~
+## $ Sex                <chr> "Female", "Female", "Female", "Female", "Female", "~
+## $ Age_months         <int> 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21,~
+## $ Weight..g.         <int> 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 25, 25, 25,~
+## $ Timepoint          <int> 20, 25, 15, 10, 35, 0, 30, 5, 45, 40, 5, 40, 35, 45~
+## $ Tumor.Volume..mm3. <dbl> 55.17334, 56.79321, 52.77787, 51.85244, 61.93165, 4~
+## $ Metastatic.Sites   <int> 1, 1, 1, 1, 2, 0, 1, 0, 2, 2, 0, 1, 1, 1, 1, 1, 1, ~
+\end{verbatim}
+
+\hypertarget{dropping-the-na-rows}{%
+\subsubsection{Dropping the NA rows}\label{dropping-the-na-rows}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{merge\_df }\OtherTok{\textless{}{-}}\NormalTok{ merge\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{drop\_na}\NormalTok{()}
+
+\FunctionTok{head}\NormalTok{(merge\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse.ID Drug.Regimen    Sex Age_months Weight..g. Timepoint
+## 1     a203    Infubinol Female         20         23        20
+## 2     a203    Infubinol Female         20         23        25
+## 3     a203    Infubinol Female         20         23        15
+## 4     a203    Infubinol Female         20         23        10
+## 5     a203    Infubinol Female         20         23        35
+## 6     a203    Infubinol Female         20         23         0
+##   Tumor.Volume..mm3. Metastatic.Sites
+## 1           55.17334                1
+## 2           56.79321                1
+## 3           52.77787                1
+## 4           51.85244                1
+## 5           61.93165                2
+## 6           45.00000                0
+\end{verbatim}
+
+\hypertarget{change-colnames-of-some-columns}{%
+\subsubsection{Change colnames of some
+columns}\label{change-colnames-of-some-columns}}
+
+\hypertarget{assigning-new-names-to-the-columns-of-the-merged-data-frame}{%
+\subsubsection{assigning new names to the columns of the merged data
+frame}\label{assigning-new-names-to-the-columns-of-the-merged-data-frame}}
+
+\hypertarget{colnamesdf2---new_col2}{%
+\subsubsection{Colnames(df){[}2{]} \textless-
+``new\_col2''}\label{colnamesdf2---new_col2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(merge\_df)[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Mouse\_Id"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(merge\_df)[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Drug\_Regimen"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(merge\_df)[}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Weight\_g"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(merge\_df)[}\DecValTok{7}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Tumor\_Volume\_mm3"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(merge\_df)[}\DecValTok{8}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Metastatic\_Sites"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(merge\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse_Id Drug_Regimen    Sex Age_months Weight_g Timepoint Tumor_Volume_mm3
+## 1     a203    Infubinol Female         20       23        20         55.17334
+## 2     a203    Infubinol Female         20       23        25         56.79321
+## 3     a203    Infubinol Female         20       23        15         52.77787
+## 4     a203    Infubinol Female         20       23        10         51.85244
+## 5     a203    Infubinol Female         20       23        35         61.93165
+## 6     a203    Infubinol Female         20       23         0         45.00000
+##   Metastatic_Sites
+## 1                1
+## 2                1
+## 3                1
+## 4                1
+## 5                2
+## 6                0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{merge\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Mouse\_Id, Timepoint)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,893 x 8
+## # Groups:   Mouse_Id, Timepoint [1,888]
+##    Mouse_Id Drug_Regimen Sex    Age_months Weight_g Timepoint Tumor_Volume_mm3
+##    <chr>    <chr>        <chr>       <int>    <int>     <int>            <dbl>
+##  1 a203     Infubinol    Female         20       23        20             55.2
+##  2 a203     Infubinol    Female         20       23        25             56.8
+##  3 a203     Infubinol    Female         20       23        15             52.8
+##  4 a203     Infubinol    Female         20       23        10             51.9
+##  5 a203     Infubinol    Female         20       23        35             61.9
+##  6 a203     Infubinol    Female         20       23         0             45  
+##  7 a203     Infubinol    Female         20       23        30             59.5
+##  8 a203     Infubinol    Female         20       23         5             48.5
+##  9 a203     Infubinol    Female         20       23        45             68.0
+## 10 a203     Infubinol    Female         20       23        40             63.6
+## # ... with 1,883 more rows, and 1 more variable: Metastatic_Sites <int>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(merge\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse_Id Drug_Regimen    Sex Age_months Weight_g Timepoint Tumor_Volume_mm3
+## 1     a203    Infubinol Female         20       23        20         55.17334
+## 2     a203    Infubinol Female         20       23        25         56.79321
+## 3     a203    Infubinol Female         20       23        15         52.77787
+## 4     a203    Infubinol Female         20       23        10         51.85244
+## 5     a203    Infubinol Female         20       23        35         61.93165
+## 6     a203    Infubinol Female         20       23         0         45.00000
+##   Metastatic_Sites
+## 1                1
+## 2                1
+## 3                1
+## 4                1
+## 5                2
+## 6                0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(merge\_df, Drug\_Regimen, Tumor\_Volume\_mm3, Age\_months, Weight\_g)}
+\FunctionTok{head}\NormalTok{(df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Drug_Regimen Tumor_Volume_mm3 Age_months Weight_g
+## 1    Infubinol         55.17334         20       23
+## 2    Infubinol         56.79321         20       23
+## 3    Infubinol         52.77787         20       23
+## 4    Infubinol         51.85244         20       23
+## 5    Infubinol         61.93165         20       23
+## 6    Infubinol         45.00000         20       23
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{group\_by}\NormalTok{(df1, Drug\_Regimen)}
+\FunctionTok{head}\NormalTok{(df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+## # Groups:   Drug_Regimen [1]
+##   Drug_Regimen Tumor_Volume_mm3 Age_months Weight_g
+##   <chr>                   <dbl>      <int>    <int>
+## 1 Infubinol                55.2         20       23
+## 2 Infubinol                56.8         20       23
+## 3 Infubinol                52.8         20       23
+## 4 Infubinol                51.9         20       23
+## 5 Infubinol                61.9         20       23
+## 6 Infubinol                45           20       23
+\end{verbatim}
+
+\hypertarget{finding-the-summary-statistics-of-tumor_volume}{%
+\subsubsection{Finding the summary statistics of
+Tumor\_Volume}\label{finding-the-summary-statistics-of-tumor_volume}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stats\_df }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise}\NormalTok{(}
+  \AttributeTok{Tumor\_Volume\_mean =} \FunctionTok{mean}\NormalTok{(Tumor\_Volume\_mm3), }\AttributeTok{Tumor\_Volume\_median =} \FunctionTok{median}\NormalTok{(Tumor\_Volume\_mm3), }\AttributeTok{Tumor\_Volume\_sd =} \FunctionTok{sd}\NormalTok{(Tumor\_Volume\_mm3), }\AttributeTok{Tumor\_Volume\_se =} \FunctionTok{sd}\NormalTok{(Tumor\_Volume\_mm3)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{((Tumor\_Volume\_mm3))))}
+
+\FunctionTok{head}\NormalTok{(stats\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+##   Drug_Regimen Tumor_Volume_me~ Tumor_Volume_me~ Tumor_Volume_sd Tumor_Volume_se
+##   <chr>                   <dbl>            <dbl>           <dbl>           <dbl>
+## 1 Capomulin                40.7             41.6            4.99           0.329
+## 2 Ceftamin                 52.6             51.8            6.27           0.470
+## 3 Infubinol                52.9             51.8            6.57           0.492
+## 4 Ketapril                 55.2             53.7            8.28           0.604
+## 5 Naftisol                 54.3             52.5            8.13           0.596
+## 6 Placebo                  54.0             52.3            7.82           0.581
+\end{verbatim}
+
+\hypertarget{comparing-means-of-tumor-size-by-drug-treatment.}{%
+\subsubsection{Comparing means of tumor size by drug
+treatment.}\label{comparing-means-of-tumor-size-by-drug-treatment.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# plot mean salaries}
+\FunctionTok{ggplot}\NormalTok{(stats\_df, }
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Drug\_Regimen, }
+           \AttributeTok{y =}\NormalTok{ Tumor\_Volume\_mean)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,  }\AttributeTok{fill =} \StringTok{"cornflowerblue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\hypertarget{side-by-side-box-plots-are-very-useful-for-comparing-groups-i.e.-the-levels-of-a-categorical-variable-on-a-numerical-variable.-outliers-are-prominent-for-drug_regimen-capomulin-propriva-ramicane-and-stelasyn.}{%
+\subsubsection{Side-by-side box plots are very useful for comparing
+groups (i.e., the levels of a categorical variable) on a numerical
+variable. Outliers are prominent for Drug\_Regimen Capomulin, Propriva,
+Ramicane and
+Stelasyn.}\label{side-by-side-box-plots-are-very-useful-for-comparing-groups-i.e.-the-levels-of-a-categorical-variable-on-a-numerical-variable.-outliers-are-prominent-for-drug_regimen-capomulin-propriva-ramicane-and-stelasyn.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(merge\_df, }
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Drug\_Regimen, }
+           \AttributeTok{y =}\NormalTok{ Tumor\_Volume\_mm3)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Mean distribution by Drug\_Regimen"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\hypertarget{finding-the-mice-count-of-each-drug-regimen}{%
+\subsubsection{Finding the mice count of each Drug
+Regimen}\label{finding-the-mice-count-of-each-drug-regimen}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count\_df }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(Drug\_Regimen)}
+
+\NormalTok{count\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 2
+## # Groups:   Drug_Regimen [10]
+##    Drug_Regimen     n
+##    <chr>        <int>
+##  1 Capomulin      230
+##  2 Ceftamin       178
+##  3 Infubinol      178
+##  4 Ketapril       188
+##  5 Naftisol       186
+##  6 Placebo        181
+##  7 Propriva       161
+##  8 Ramicane       228
+##  9 Stelasyn       181
+## 10 Zoniferol      182
+\end{verbatim}
+
+\hypertarget{ploting-the-number-of-mice-in-each-drug-regimen}{%
+\subsubsection{Ploting the number of mice in each drug
+regimen}\label{ploting-the-number-of-mice-in-each-drug-regimen}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{230}\NormalTok{, }\DecValTok{178}\NormalTok{, }\DecValTok{178}\NormalTok{, }\DecValTok{188}\NormalTok{, }\DecValTok{186}\NormalTok{, }\DecValTok{181}\NormalTok{, }\DecValTok{161}\NormalTok{, }\DecValTok{228}\NormalTok{, }\DecValTok{181}\NormalTok{, }\DecValTok{182}\NormalTok{),}
+        \AttributeTok{names.arg=}\FunctionTok{c}\NormalTok{(}\StringTok{"Capomulin"}\NormalTok{,}\StringTok{"Ceftamin"}\NormalTok{,}\StringTok{"Infubinol"}\NormalTok{,}\StringTok{"Ketapril"}\NormalTok{,}\StringTok{"Naftisol"}\NormalTok{, }\StringTok{"Placebo"}\NormalTok{, }\StringTok{"Propriva"}\NormalTok{, }\StringTok{"Ramicane"}\NormalTok{, }\StringTok{"Stelasyn"}\NormalTok{, }\StringTok{"Zoniferol"}\NormalTok{),}
+        \AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{250}\NormalTok{),}
+        \AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"beige"}\NormalTok{,}\StringTok{"orange"}\NormalTok{,}\StringTok{"lightgreen"}\NormalTok{,}\StringTok{"lightblue"}\NormalTok{,}\StringTok{"yellow"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"pink"}\NormalTok{, }\StringTok{"purple"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+        \AttributeTok{ylab=}\StringTok{"Count of Mice per Drug Regimen"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\hypertarget{remove-duplicate-rows-across-entire-data-frame}{%
+\subsubsection{Remove duplicate rows across entire data
+frame}\label{remove-duplicate-rows-across-entire-data-frame}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{merge\_df }\OtherTok{\textless{}{-}}\NormalTok{ merge\_df[}\SpecialCharTok{!}\FunctionTok{duplicated}\NormalTok{(merge\_df), ]}
+
+\FunctionTok{head}\NormalTok{(merge\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse_Id Drug_Regimen    Sex Age_months Weight_g Timepoint Tumor_Volume_mm3
+## 1     a203    Infubinol Female         20       23        20         55.17334
+## 2     a203    Infubinol Female         20       23        25         56.79321
+## 3     a203    Infubinol Female         20       23        15         52.77787
+## 4     a203    Infubinol Female         20       23        10         51.85244
+## 5     a203    Infubinol Female         20       23        35         61.93165
+## 6     a203    Infubinol Female         20       23         0         45.00000
+##   Metastatic_Sites
+## 1                1
+## 2                1
+## 3                1
+## 4                1
+## 5                2
+## 6                0
+\end{verbatim}
+
+\hypertarget{filter-by-capomulin-infubinol-ketapril-and-placebo}{%
+\subsubsection{filter by Capomulin, Infubinol, Ketapril, and
+Placebo}\label{filter-by-capomulin-infubinol-ketapril-and-placebo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capomulin\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(merge\_df, Drug\_Regimen }\SpecialCharTok{==} \StringTok{"Capomulin"}\NormalTok{)}
+\NormalTok{infubinol\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(merge\_df, Drug\_Regimen }\SpecialCharTok{==} \StringTok{"Infubinol"}\NormalTok{)}
+\NormalTok{ketapril\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(merge\_df, Drug\_Regimen }\SpecialCharTok{==} \StringTok{"Ketapril"}\NormalTok{)}
+\NormalTok{placebo\_df }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(merge\_df, Drug\_Regimen }\SpecialCharTok{==} \StringTok{"Placebo"}\NormalTok{)}
+
+
+\FunctionTok{head}\NormalTok{(capomulin\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse_Id Drug_Regimen    Sex Age_months Weight_g Timepoint Tumor_Volume_mm3
+## 1     b128    Capomulin Female          9       22         5         45.65133
+## 2     b128    Capomulin Female          9       22        25         43.26214
+## 3     b128    Capomulin Female          9       22        35         37.96764
+## 4     b128    Capomulin Female          9       22        10         43.27085
+## 5     b128    Capomulin Female          9       22         0         45.00000
+## 6     b128    Capomulin Female          9       22        40         38.37973
+##   Metastatic_Sites
+## 1                0
+## 2                1
+## 3                1
+## 4                0
+## 5                0
+## 6                2
+\end{verbatim}
+
+\hypertarget{to-generate-a-scatter-plot-of-average-tumor-volume-vs.-mouse-weight-for-all-mice-in-the-capomulin-regimen.}{%
+\subsubsection{To generate a scatter plot of average tumor volume
+vs.~mouse weight for all mice in the Capomulin
+regimen.}\label{to-generate-a-scatter-plot-of-average-tumor-volume-vs.-mouse-weight-for-all-mice-in-the-capomulin-regimen.}}
+
+\hypertarget{first-we-calculate-the-final-tumor-volume-of-each-mouse_id-across-four-of-the-treatment-regimens}{%
+\subsubsection{First we calculate the final tumor volume of each
+mouse\_id across four of the treatment
+regimens:}\label{first-we-calculate-the-final-tumor-volume-of-each-mouse_id-across-four-of-the-treatment-regimens}}
+
+\hypertarget{capomulin-infubinol-ketapril-and-placebo}{%
+\subsubsection{(Capomulin, Infubinol, Ketapril, and
+Placebo)}\label{capomulin-infubinol-ketapril-and-placebo}}
+
+\hypertarget{since-not-all-mice-lived-until-timepoint-45-we-start-by-getting-the-last-greatest-timepoint-for-each-mouse}{%
+\subsubsection{Since not all mice lived until timepoint 45, we start by
+getting the last (greatest) timepoint for each
+mouse}\label{since-not-all-mice-lived-until-timepoint-45-we-start-by-getting-the-last-greatest-timepoint-for-each-mouse}}
+
+\hypertarget{capomulin_df}{%
+\subsubsection{capomulin\_df:}\label{capomulin_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(capomulin\_df, Mouse\_Id, Timepoint, Tumor\_Volume\_mm3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Timepoint }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(Timepoint, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(capo\_df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Timepoint Tumor_Volume_mm3
+##   <chr>        <int>            <dbl>
+## 1 b128            45             39.0
+## 2 b742            45             38.9
+## 3 f966            20             30.5
+## 4 g288            45             37.1
+## 5 g316            45             40.2
+## 6 i557            45             47.7
+\end{verbatim}
+
+\hypertarget{find-the-average-weight-by-mice_id-in-capomulin_df}{%
+\subsubsection{Find the average weight by mice\_id in
+Capomulin\_df}\label{find-the-average-weight-by-mice_id-in-capomulin_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df2 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(capomulin\_df, Mouse\_Id, Weight\_g) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_weight =} \FunctionTok{mean}\NormalTok{(Weight\_g, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(capo\_df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Mouse_Id Average_weight
+##   <chr>             <dbl>
+## 1 b128                 22
+## 2 b742                 21
+## 3 f966                 17
+## 4 g288                 19
+## 5 g316                 22
+## 6 i557                 24
+\end{verbatim}
+
+\hypertarget{joining-the-two-dfs-for-adding-average-weight}{%
+\subsubsection{Joining the two df's for adding average
+weight}\label{joining-the-two-dfs-for-adding-average-weight}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df }\OtherTok{\textless{}{-}}\NormalTok{ capo\_df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(capo\_df2, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(capo\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Timepoint Tumor_Volume_mm3 Average_weight
+##   <chr>        <int>            <dbl>          <dbl>
+## 1 b128            45             39.0             22
+## 2 b742            45             38.9             21
+## 3 f966            20             30.5             17
+## 4 g288            45             37.1             19
+## 5 g316            45             40.2             22
+## 6 i557            45             47.7             24
+\end{verbatim}
+
+\hypertarget{find-the-average-age-by-mice_id-in-capomulin_df}{%
+\subsubsection{Find the average age by mice\_id in
+Capomulin\_df}\label{find-the-average-age-by-mice_id-in-capomulin_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(capomulin\_df, Mouse\_Id, Age\_months) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_age =} \FunctionTok{mean}\NormalTok{(Age\_months, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(capo\_df3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   Mouse_Id Average_age
+##   <chr>          <dbl>
+## 1 b128               9
+## 2 b742               7
+## 3 f966              16
+## 4 g288               3
+## 5 g316              22
+## 6 i557               1
+\end{verbatim}
+
+\hypertarget{joining-the-two-dfs-for-adding-average-age}{%
+\subsubsection{Joining the two df's for adding average
+age}\label{joining-the-two-dfs-for-adding-average-age}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df }\OtherTok{\textless{}{-}}\NormalTok{ capo\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(capo\_df3, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(capo\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Timepoint Tumor_Volume_mm3 Average_weight Average_age
+##   <chr>        <int>            <dbl>          <dbl>       <dbl>
+## 1 b128            45             39.0             22           9
+## 2 b742            45             38.9             21           7
+## 3 f966            20             30.5             17          16
+## 4 g288            45             37.1             19           3
+## 5 g316            45             40.2             22          22
+## 6 i557            45             47.7             24           1
+\end{verbatim}
+
+\hypertarget{summerize-the-tumor_volume_mm3}{%
+\subsubsection{summerize the
+Tumor\_Volume\_mm3}\label{summerize-the-tumor_volume_mm3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   23.34   32.38   38.13   36.67   40.16   47.69
+\end{verbatim}
+
+\hypertarget{standard-deviation}{%
+\subsubsection{Standard Deviation}\label{standard-deviation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.715188
+\end{verbatim}
+
+\hypertarget{for-project-proposal-plotting-correlation-matrices-with-all-the-relevant-variables-for-capomulin-drug-to-analyze.}{%
+\subsubsection{For project proposal, plotting correlation matrices with
+all the relevant variables for Capomulin drug to
+analyze.}\label{for-project-proposal-plotting-correlation-matrices-with-all-the-relevant-variables-for-capomulin-drug-to-analyze.}}
+
+\hypertarget{capomulin_df-vs-age_months}{%
+\subsubsection{capomulin\_df Vs
+Age\_months}\label{capomulin_df-vs-age_months}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Average\_age, capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ capo\_df}\SpecialCharTok{$}\NormalTok{Average\_age), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Average\_age, capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-37-1.pdf}
+
+\hypertarget{capomulin_df-vs-weight_g}{%
+\subsubsection{capomulin\_df Vs
+Weight\_g}\label{capomulin_df-vs-weight_g}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ capo\_df}\SpecialCharTok{$}\NormalTok{Average\_weight), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\hypertarget{correlation-matrix}{%
+\subsubsection{Correlation Matrix}\label{correlation-matrix}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pairs}\NormalTok{(capo\_df[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{5}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+\hypertarget{infubinol_df}{%
+\subsubsection{Infubinol\_df:}\label{infubinol_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{infu\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(infubinol\_df, Mouse\_Id, Timepoint, Tumor\_Volume\_mm3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Timepoint }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(Timepoint, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Find the average weight by mice\_id in Infubinol\_df}
+
+
+\NormalTok{infu\_df2 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(infubinol\_df, Mouse\_Id, Weight\_g) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_weight =} \FunctionTok{mean}\NormalTok{(Weight\_g, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Joining the two df\textquotesingle{}s for adding average weight}
+
+\NormalTok{infu\_df }\OtherTok{\textless{}{-}}\NormalTok{ infu\_df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(infu\_df2, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\DocumentationTok{\#\#\# Find the average age by mice\_id in Capomulin\_df}
+
+\NormalTok{infu\_df3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(infubinol\_df, Mouse\_Id, Age\_months) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_age =} \FunctionTok{mean}\NormalTok{(Age\_months, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Joining the two df\textquotesingle{}s for adding average age}
+
+\NormalTok{infu\_df }\OtherTok{\textless{}{-}}\NormalTok{ infu\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(infu\_df3, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(infu\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Timepoint Tumor_Volume_mm3 Average_weight Average_age
+##   <chr>        <int>            <dbl>          <dbl>       <dbl>
+## 1 a203            45             68.0             23          20
+## 2 a251            45             65.5             25          21
+## 3 a577            30             57.0             25           6
+## 4 a685            45             66.1             30           8
+## 5 c139            45             72.2             28          11
+## 6 c326             5             36.3             25          18
+\end{verbatim}
+
+\hypertarget{summerize-the-tumor_volume_mm3-1}{%
+\subsubsection{summerize the
+Tumor\_Volume\_mm3}\label{summerize-the-tumor_volume_mm3-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   36.32   54.05   60.17   58.18   65.53   72.23
+\end{verbatim}
+
+\hypertarget{standard-deviation-1}{%
+\subsubsection{Standard Deviation}\label{standard-deviation-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8.602957
+\end{verbatim}
+
+\hypertarget{infubinol_df-vs-age_months}{%
+\subsubsection{infubinol\_df Vs
+Age\_months}\label{infubinol_df-vs-age_months}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(infu\_df}\SpecialCharTok{$}\NormalTok{Average\_age, infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ infu\_df}\SpecialCharTok{$}\NormalTok{Average\_age), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(infu\_df}\SpecialCharTok{$}\NormalTok{Average\_age, infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-43-1.pdf}
+
+\hypertarget{infubinol_df-vs-weight_g}{%
+\subsubsection{infubinol\_df Vs
+Weight\_g}\label{infubinol_df-vs-weight_g}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(infu\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ infu\_df}\SpecialCharTok{$}\NormalTok{Average\_weight), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(infu\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, infu\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-44-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pairs}\NormalTok{(infu\_df[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{5}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-45-1.pdf}
+
+\hypertarget{ketapril_df}{%
+\subsubsection{ketapril\_df:}\label{ketapril_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{keta\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(ketapril\_df, Mouse\_Id, Timepoint, Tumor\_Volume\_mm3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Timepoint }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(Timepoint, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Find the average weight by mice\_id in Infubinol\_df}
+
+
+\NormalTok{keta\_df2 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(ketapril\_df, Mouse\_Id, Weight\_g) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_weight =} \FunctionTok{mean}\NormalTok{(Weight\_g, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Joining the two df\textquotesingle{}s for adding average weight}
+
+\NormalTok{keta\_df }\OtherTok{\textless{}{-}}\NormalTok{ keta\_df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(keta\_df2, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\DocumentationTok{\#\#\# Find the average age by mice\_id in Capomulin\_df}
+
+\NormalTok{keta\_df3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(ketapril\_df, Mouse\_Id, Age\_months) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_age =} \FunctionTok{mean}\NormalTok{(Age\_months, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Joining the two df\textquotesingle{}s for adding average age}
+
+\NormalTok{keta\_df }\OtherTok{\textless{}{-}}\NormalTok{ keta\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(keta\_df3, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(keta\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Timepoint Tumor_Volume_mm3 Average_weight Average_age
+##   <chr>        <int>            <dbl>          <dbl>       <dbl>
+## 1 a457            10             49.8             30          11
+## 2 c580            30             58.0             25          22
+## 3 c819            40             62.2             25          21
+## 4 c832            45             65.4             29          18
+## 5 d474            40             60.2             27          18
+## 6 f278             5             48.2             30          12
+\end{verbatim}
+
+\hypertarget{summerize-the-tumor_volume_mm3-2}{%
+\subsubsection{summerize the
+Tumor\_Volume\_mm3}\label{summerize-the-tumor_volume_mm3-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   45.00   56.72   64.49   62.81   69.87   78.57
+\end{verbatim}
+
+\hypertarget{standard-deviation-2}{%
+\subsubsection{Standard Deviation}\label{standard-deviation-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.94592
+\end{verbatim}
+
+\hypertarget{ketapril_df-vs-age_months}{%
+\subsubsection{ketapril\_df Vs
+Age\_months}\label{ketapril_df-vs-age_months}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Average\_age, keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ keta\_df}\SpecialCharTok{$}\NormalTok{Average\_age), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Average\_age, keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-49-1.pdf}
+
+\hypertarget{ketapril_df-vs-weight_g}{%
+\subsubsection{ketapril\_df Vs
+Weight\_g}\label{ketapril_df-vs-weight_g}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ keta\_df}\SpecialCharTok{$}\NormalTok{Average\_weight), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-50-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pairs}\NormalTok{(keta\_df[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{5}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-51-1.pdf}
+
+\hypertarget{placebo_df}{%
+\subsubsection{placebo\_df:}\label{placebo_df}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plac\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(placebo\_df, Mouse\_Id, Timepoint, Tumor\_Volume\_mm3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Timepoint }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(Timepoint, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Find the average weight by mice\_id in Infubinol\_df}
+
+
+\NormalTok{plac\_df2 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(placebo\_df, Mouse\_Id, Weight\_g) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_weight =} \FunctionTok{mean}\NormalTok{(Weight\_g, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Joining the two df\textquotesingle{}s for adding average weight}
+
+\NormalTok{plac\_df }\OtherTok{\textless{}{-}}\NormalTok{ plac\_df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(plac\_df2, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\DocumentationTok{\#\#\# Find the average age by mice\_id in Capomulin\_df}
+
+\NormalTok{plac\_df3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(placebo\_df, Mouse\_Id, Age\_months) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Average\_age =} \FunctionTok{mean}\NormalTok{(Age\_months, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# Joining the two df\textquotesingle{}s for adding average age}
+
+\NormalTok{plac\_df }\OtherTok{\textless{}{-}}\NormalTok{ plac\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{inner\_join}\NormalTok{(plac\_df3, }\AttributeTok{by =} \StringTok{"Mouse\_Id"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(plac\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Timepoint Tumor_Volume_mm3 Average_weight Average_age
+##   <chr>        <int>            <dbl>          <dbl>       <dbl>
+## 1 a262            45             70.7             29          17
+## 2 a897            45             72.3             28           7
+## 3 c282            45             65.8             27          12
+## 4 c757            45             69.0             27           9
+## 5 c766            45             69.8             26          13
+## 6 e227            45             73.2             30           1
+\end{verbatim}
+
+\hypertarget{summerize-the-tumor_volume_mm3-3}{%
+\subsubsection{summerize the
+Tumor\_Volume\_mm3}\label{summerize-the-tumor_volume_mm3-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   45.00   52.94   62.03   60.51   68.13   73.21
+\end{verbatim}
+
+\hypertarget{standard-deviation-3}{%
+\subsubsection{Standard Deviation}\label{standard-deviation-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8.874672
+\end{verbatim}
+
+\hypertarget{placebo_df-vs-age_months}{%
+\subsubsection{placebo\_df Vs
+Age\_months}\label{placebo_df-vs-age_months}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(plac\_df}\SpecialCharTok{$}\NormalTok{Average\_age, plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ plac\_df}\SpecialCharTok{$}\NormalTok{Average\_age), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(plac\_df}\SpecialCharTok{$}\NormalTok{Average\_age, plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-55-1.pdf}
+
+\hypertarget{placebo_df-vs-weight_g}{%
+\subsubsection{placebo\_df Vs Weight\_g}\label{placebo_df-vs-weight_g}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating the plot}
+\FunctionTok{plot}\NormalTok{(plac\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
+
+\CommentTok{\# Regression line}
+\FunctionTok{abline}\NormalTok{(}\FunctionTok{lm}\NormalTok{(plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ plac\_df}\SpecialCharTok{$}\NormalTok{Average\_weight), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Pearson correlation}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Correlation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(plac\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, plac\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3), }\DecValTok{2}\NormalTok{)), }\AttributeTok{x =} \DecValTok{25}\NormalTok{, }\AttributeTok{y =} \DecValTok{95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-56-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pairs}\NormalTok{(plac\_df[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{5}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-57-1.pdf}
+
+From the plots above, there seems a correlation between weight and Tumor
+size for capomulin drug regimen but will be checked by calculating the
+correlation coefficient.
+
+\hypertarget{loading-the-following-required-packages}{%
+\subsection{loading the following required
+packages:}\label{loading-the-following-required-packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(ggpubr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggpubr' was built under R version 4.1.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rstatix)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rstatix' was built under R version 4.1.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rstatix'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     filter
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(infer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'infer' was built under R version 4.1.2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'infer'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:rstatix':
+## 
+##     chisq_test, prop_test, t_test
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(moonBook)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'moonBook' was built under R version 4.1.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(webr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'webr' was built under R version 4.1.3
+\end{verbatim}
+
+\hypertarget{pearson-correlation-r}{%
+\subsubsection{Pearson correlation (r)}\label{pearson-correlation-r}}
+
+which measures a linear dependence between two variables (x and y). It's
+also known as a parametric correlation test because it depends to the
+distribution of the data. It can be used only when x and y are from
+normal distribution. The plot of y = f(x) is named the linear regression
+curve.
+
+cor() computes the correlation coefficient cor.test() test for
+association/correlation between paired samples. It returns both the
+correlation coefficient and the significance level(or p-value) of the
+correlation .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, capo\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, }\AttributeTok{method =} \FunctionTok{c}\NormalTok{(}\StringTok{"pearson"}\NormalTok{, }\StringTok{"kendall"}\NormalTok{, }\StringTok{"spearman"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.876706
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(capo\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, capo\_df}\SpecialCharTok{$}\NormalTok{Average\_weight, }\AttributeTok{method=}\FunctionTok{c}\NormalTok{(}\StringTok{"pearson"}\NormalTok{, }\StringTok{"kendall"}\NormalTok{, }\StringTok{"spearman"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  capo_df$Tumor_Volume_mm3 and capo_df$Average_weight
+## t = 8.7408, df = 23, p-value = 9.084e-09
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.7368195 0.9446109
+## sample estimates:
+##      cor 
+## 0.876706
+\end{verbatim}
+
+\#\#\# Visualizing the Data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggscatter}\NormalTok{(capo\_df, }\AttributeTok{x =} \StringTok{"Tumor\_Volume\_mm3"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Average\_weight"}\NormalTok{, }
+          \AttributeTok{add =} \StringTok{"reg.line"}\NormalTok{, }\AttributeTok{conf.int =} \ConstantTok{TRUE}\NormalTok{, }
+          \AttributeTok{cor.coef =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{cor.method =} \StringTok{"pearson"}\NormalTok{,}
+          \AttributeTok{xlab =} \StringTok{"Tumor Size mm3"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Average Weight"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-60-1.pdf}
+
+R is a measure of any linear trend between two variables. The value of r
+ranges between −1 and 1
+
+From the plot above, the value of R=0.88 shows strong linear
+relationship.
+
+\hypertarget{answer-the-research-question}{%
+\section{Answer the Research
+Question:}\label{answer-the-research-question}}
+
+\hypertarget{testing-the-correlation-between-average-age-and-tumor-size-for-ketapril-drug-regimen}{%
+\subsubsection{Testing the correlation between average age and Tumor
+size for ketapril drug
+regimen:}\label{testing-the-correlation-between-average-age-and-tumor-size-for-ketapril-drug-regimen}}
+
+Correlation test is performed to evaluate the association between two or
+more variables.
+
+keta\_df\(Average_age, keta_df\)Tumor\_Volume\_mm3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, keta\_df}\SpecialCharTok{$}\NormalTok{Average\_age, }\AttributeTok{method =} \FunctionTok{c}\NormalTok{(}\StringTok{"pearson"}\NormalTok{, }\StringTok{"kendall"}\NormalTok{, }\StringTok{"spearman"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2763875
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(keta\_df}\SpecialCharTok{$}\NormalTok{Tumor\_Volume\_mm3, keta\_df}\SpecialCharTok{$}\NormalTok{Average\_age, }\AttributeTok{method=}\FunctionTok{c}\NormalTok{(}\StringTok{"pearson"}\NormalTok{, }\StringTok{"kendall"}\NormalTok{, }\StringTok{"spearman"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  keta_df$Tumor_Volume_mm3 and keta_df$Average_age
+## t = 1.3792, df = 23, p-value = 0.1811
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.1333012  0.6054028
+## sample estimates:
+##       cor 
+## 0.2763875
+\end{verbatim}
+
+\#\#\# Visualizing the Data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggscatter}\NormalTok{(keta\_df, }\AttributeTok{x =} \StringTok{"Tumor\_Volume\_mm3"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Average\_age"}\NormalTok{, }
+          \AttributeTok{add =} \StringTok{"reg.line"}\NormalTok{, }\AttributeTok{conf.int =} \ConstantTok{TRUE}\NormalTok{, }
+          \AttributeTok{cor.coef =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{cor.method =} \StringTok{"pearson"}\NormalTok{,}
+          \AttributeTok{xlab =} \StringTok{"Tumor Size mm3"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Average Age"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-62-1.pdf}
+R is a measure of any linear trend between two variables. The value of r
+ranges between −1 and 1
+
+From the plot above, the value of R=0.28 shows week linear relationship.
+
+\hypertarget{preparing-data-for-capomulin-and-placebo-statistical-analysis}{%
+\subsubsection{Preparing Data for Capomulin and Placebo Statistical
+analysis}\label{preparing-data-for-capomulin-and-placebo-statistical-analysis}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(capomulin\_df, Mouse\_Id, Drug\_Regimen, Timepoint, Tumor\_Volume\_mm3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Timepoint }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(Timepoint, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(capo\_df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Drug_Regimen Timepoint Tumor_Volume_mm3
+##   <chr>    <chr>            <int>            <dbl>
+## 1 b128     Capomulin           45             39.0
+## 2 b742     Capomulin           45             38.9
+## 3 f966     Capomulin           20             30.5
+## 4 g288     Capomulin           45             37.1
+## 5 g316     Capomulin           45             40.2
+## 6 i557     Capomulin           45             47.7
+\end{verbatim}
+
+\hypertarget{to-select-the-specific-columns-capo_df1}{%
+\subsubsection{To select the specific columns
+capo\_df1}\label{to-select-the-specific-columns-capo_df1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{capo\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(capomulin\_df, Mouse\_Id, Drug\_Regimen, Tumor\_Volume\_mm3)}
+
+\FunctionTok{head}\NormalTok{(capo\_df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Mouse_Id Drug_Regimen Tumor_Volume_mm3
+## 1     b128    Capomulin         45.65133
+## 2     b128    Capomulin         43.26214
+## 3     b128    Capomulin         37.96764
+## 4     b128    Capomulin         43.27085
+## 5     b128    Capomulin         45.00000
+## 6     b128    Capomulin         38.37973
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plac\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(placebo\_df, Mouse\_Id, Timepoint, Drug\_Regimen, Tumor\_Volume\_mm3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Timepoint }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(Timepoint, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(plac\_df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+## # Groups:   Mouse_Id [6]
+##   Mouse_Id Timepoint Drug_Regimen Tumor_Volume_mm3
+##   <chr>        <int> <chr>                   <dbl>
+## 1 a262            45 Placebo                  70.7
+## 2 a897            45 Placebo                  72.3
+## 3 c282            45 Placebo                  65.8
+## 4 c757            45 Placebo                  69.0
+## 5 c766            45 Placebo                  69.8
+## 6 e227            45 Placebo                  73.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plac\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(placebo\_df, Mouse\_Id, Drug\_Regimen, Tumor\_Volume\_mm3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Mouse\_Id)}
+
+\FunctionTok{head}\NormalTok{(plac\_df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+## # Groups:   Mouse_Id [1]
+##   Mouse_Id Drug_Regimen Tumor_Volume_mm3
+##   <chr>    <chr>                   <dbl>
+## 1 a262     Placebo                  69.6
+## 2 a262     Placebo                  45  
+## 3 a262     Placebo                  53.8
+## 4 a262     Placebo                  60.1
+## 5 a262     Placebo                  65.0
+## 6 a262     Placebo                  57.0
+\end{verbatim}
+
+\hypertarget{to-select-the-specific-columns-plac_df1}{%
+\subsubsection{To select the specific columns
+plac\_df1}\label{to-select-the-specific-columns-plac_df1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plac\_df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(placebo\_df, Drug\_Regimen, Tumor\_Volume\_mm3)}
+
+\FunctionTok{head}\NormalTok{(plac\_df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Drug_Regimen Tumor_Volume_mm3
+## 1      Placebo         69.59273
+## 2      Placebo         45.00000
+## 3      Placebo         53.82797
+## 4      Placebo         60.13186
+## 5      Placebo         64.95809
+## 6      Placebo         57.01331
+\end{verbatim}
+
+\hypertarget{joining-the-two-drug-regemin-datasets}{%
+\subsubsection{Joining the two drug regemin
+datasets}\label{joining-the-two-drug-regemin-datasets}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}}\NormalTok{ capo\_df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{full\_join}\NormalTok{(plac\_df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = c("Drug_Regimen", "Tumor_Volume_mm3")
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(df1, Drug\_Regimen, Tumor\_Volume\_mm3)}
+\FunctionTok{head}\NormalTok{(df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Drug_Regimen Tumor_Volume_mm3
+## 1    Capomulin         45.65133
+## 2    Capomulin         43.26214
+## 3    Capomulin         37.96764
+## 4    Capomulin         43.27085
+## 5    Capomulin         45.00000
+## 6    Capomulin         38.37973
+\end{verbatim}
+
+\hypertarget{compute-some-summary-statistics-by-groups-mean-and-sd-standard-deviation}{%
+\subsubsection{Compute some summary statistics by groups: mean and sd
+(standard
+deviation)}\label{compute-some-summary-statistics-by-groups-mean-and-sd-standard-deviation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Drug\_Regimen) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{get\_summary\_stats}\NormalTok{(Tumor\_Volume\_mm3, }\AttributeTok{type =} \StringTok{"mean\_sd"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 5
+##   Drug_Regimen variable             n  mean    sd
+##   <chr>        <chr>            <dbl> <dbl> <dbl>
+## 1 Capomulin    Tumor_Volume_mm3   230  40.7  5.00
+## 2 Placebo      Tumor_Volume_mm3   181  54.0  7.82
+\end{verbatim}
+
+\hypertarget{there-is-an-observed-difference-but-is-this-difference-statistically-significant-in-order-to-answer-this-question-we-will-conduct-a-hypothesis-test.}{%
+\subsubsection{There is an observed difference, but is this difference
+statistically significant? In order to answer this question we will
+conduct a hypothesis
+test.}\label{there-is-an-observed-difference-but-is-this-difference-statistically-significant-in-order-to-answer-this-question-we-will-conduct-a-hypothesis-test.}}
+
+\hypertarget{hypothesis-testing-for-capomulin-drug-regimen}{%
+\section{Hypothesis Testing for Capomulin drug
+regimen:}\label{hypothesis-testing-for-capomulin-drug-regimen}}
+
+sample size(n) = 25, sample Tumor size mean(xbar) = 36.67 mm3, standard
+devation = 5.71 mm3
+
+\hypertarget{step-1-formulate-hypothesis}{%
+\subsubsection{Step 1: Formulate
+Hypothesis}\label{step-1-formulate-hypothesis}}
+
+Null hypothesis: There is no difference between the effectiveness of the
+four drug regimens. In other words, the difference in mean of the size
+of Tumor for Capomulin drug regimen result Placebo is zero.
+
+Null Hypothesis H\^{}0: mu = 54.034 Alternate Hypothesis: mu != 54.034
+
+It is a Two Tailed test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{obs\_diff }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{specify}\NormalTok{(Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Drug\_Regimen) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in means"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"Capomulin"}\NormalTok{, }\StringTok{"Placebo"}\NormalTok{))}
+
+\NormalTok{obs\_diff}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Response: Tumor_Volume_mm3 (numeric)
+## Explanatory: Drug_Regimen (factor)
+## # A tibble: 1 x 1
+##    stat
+##   <dbl>
+## 1 -13.4
+\end{verbatim}
+
+\hypertarget{to-simulate-the-test-on-the-null-distribution-which-we-will-save-as-null}{%
+\subsubsection{To simulate the test on the null distribution, which we
+will save as
+null}\label{to-simulate-the-test-on-the-null-distribution-which-we-will-save-as-null}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{null\_dist }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{specify}\NormalTok{(Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Drug\_Regimen) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{hypothesize}\NormalTok{(}\AttributeTok{null =} \StringTok{"independence"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{generate}\NormalTok{(}\AttributeTok{reps =} \DecValTok{1000}\NormalTok{, }\AttributeTok{type =} \StringTok{"permute"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{calculate}\NormalTok{(}\AttributeTok{stat =} \StringTok{"diff in means"}\NormalTok{, }\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\StringTok{"Capomulin"}\NormalTok{, }\StringTok{"Placebo"}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(null\_dist)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Response: Tumor_Volume_mm3 (numeric)
+## Explanatory: Drug_Regimen (factor)
+## Null Hypothesis: independence
+## # A tibble: 6 x 2
+##   replicate   stat
+##       <int>  <dbl>
+## 1         1 -1.16 
+## 2         2  1.16 
+## 3         3 -0.594
+## 4         4 -0.529
+## 5         5 -0.182
+## 6         6 -0.820
+\end{verbatim}
+
+\hypertarget{visualize-this-null-distribution}{%
+\subsubsection{visualize this null
+distribution}\label{visualize-this-null-distribution}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ null\_dist, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ stat, }\AttributeTok{fill =} \StringTok{"color"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-72-1.pdf}
+
+\hypertarget{before-performing-a-t-test-you-have-to-compare-two-variances.}{%
+\subsubsection{Before performing a t-test, you have to compare two
+variances.}\label{before-performing-a-t-test-you-have-to-compare-two-variances.}}
+
+\hypertarget{f-test-to-compare-two-variances}{%
+\subsubsection{F test to compare two
+variances:}\label{f-test-to-compare-two-variances}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\OtherTok{=}\FunctionTok{var.test}\NormalTok{(Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Drug\_Regimen, }\AttributeTok{data =}\NormalTok{ df1)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test to compare two variances
+## 
+## data:  Tumor_Volume_mm3 by Drug_Regimen
+## F = 0.40786, num df = 229, denom df = 180, p-value = 1.857e-10
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.3084916 0.5367226
+## sample estimates:
+## ratio of variances 
+##          0.4078559
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-74-1.pdf}
+
+\hypertarget{step-2-calculate-the-t_statistics}{%
+\subsubsection{Step 2: Calculate the
+t\_statistics}\label{step-2-calculate-the-t_statistics}}
+
+Here you translate this test on to t\_ distribution by calculating the
+t\_statistics
+
+t\_statistic = xbar-mu/s/square root of n
+
+\hypertarget{two-sample-t-test}{%
+\subsubsection{Two-sample t-test:}\label{two-sample-t-test}}
+
+The two-sample t-test is also known as the independent t-test. The
+independent samples t-test comes in two different forms:
+
+the standard Student's t-test, which assumes that the variance of the
+two groups are equal. the Welch's t-test, which is less restrictive
+compared to the original Student's test. This is the test where you do
+not assume that the variance is the same in the two groups, which
+results in the fractional degrees of freedom.
+
+\hypertarget{calculations}{%
+\subsubsection{Calculations:}\label{calculations}}
+
+R computes the Welch t-test, where you do not assume that the variance
+is the same in the two groups, which results in the fractional degrees
+of freedom.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t\_result }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(Tumor\_Volume\_mm3 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Drug\_Regimen, }\AttributeTok{data =}\NormalTok{ df1)}
+
+\NormalTok{t\_result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  Tumor_Volume_mm3 by Drug_Regimen
+## t = -19.993, df = 290.56, p-value < 2.2e-16
+## alternative hypothesis: true difference in means between group Capomulin and group Placebo is not equal to 0
+## 95 percent confidence interval:
+##  -14.67285 -12.04283
+## sample estimates:
+## mean in group Capomulin   mean in group Placebo 
+##                40.67574                54.03358
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(t\_result)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Qari_Final_Project_files/figure-latex/unnamed-chunk-76-1.pdf}
+
+\hypertarget{in-the-result-above}{%
+\subsubsection{In the result above:}\label{in-the-result-above}}
+
+t is the t-test statistic value (t = -19.993), df is the degrees of
+freedom (df= 290.56), p-value is the significance level of the t-test
+(p-value = 2.2e-16). conf.int is the confidence interval of the means
+difference at 95\% (conf.int = {[}-14.67285 -12.04283{]}); sample
+estimates is the mean value of the sample (mean = 40.67574, 54.03358).
+
+the t-statistic, t = -19.993,
+
+\hypertarget{meaning-of-translating-the-hypothesis-test-on-to-the-t_statistics}{%
+\subsubsection{Meaning of translating the hypothesis test on to the
+t\_statistics:}\label{meaning-of-translating-the-hypothesis-test-on-to-the-t_statistics}}
+
+sample mean of Capomulin = 40.67574 is way above the sample mean in
+group Placebo = 54.034 is equivalent to translating that the
+t-statistics of -19.993 is way above 0.
+
+Similarly sample mean of Capomulin = 40.67574 is way below the sample
+mean in group Placebo = 54.034 is equivalent to translating that the
+t-statistics of -19.993 is way below 0.
+
+\hypertarget{step-3-determine-the-cutoff-values-for-the-t_statistics.}{%
+\subsubsection{Step 3: Determine the Cutoff values for the
+t\_statistics.}\label{step-3-determine-the-cutoff-values-for-the-t_statistics.}}
+
+So that we can identify the rejection region for the hypothesis testing.
+
+This is done by first specifying the value of alpha which in the context
+of hypothesis test aka significance level
+
+Typically the value of alpha=0.05 or 0.01 corresponding to 95\% or 99\%
+confidence respectively.
+
+So, our cutoff values for the t-statistic, denoted by t cutoff, are
+those values in the t distribution, with n- 1 degrees of freedom, that
+cut off, alpha/2 probability to the right, and alpha/2 probability to
+the left.
+
+This is a two-tail test with one rejection region on the right, and one
+rejection region on the left.
+
+Hence, the total rejection probability of alpha gets equally divided
+across the two rejection regions.
+
+\hypertarget{step-4-check-whether-t_statistics-falls-in-the-rejection-region}{%
+\subsubsection{Step 4: Check whether t\_statistics falls in the
+rejection
+region}\label{step-4-check-whether-t_statistics-falls-in-the-rejection-region}}
+
+\hypertarget{interpretation}{%
+\subsubsection{Interpretation:}\label{interpretation}}
+
+Hypothesis testing ultimately uses a p-value to weigh the strength of
+the evidence or in other words what the data are about the population.
+The p-value ranges between 0 and 1. It can be interpreted in the
+following way:
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the
+null hypothesis, so you reject it. A large p-value (\textgreater{} 0.05)
+indicates weak evidence against the null hypothesis, so you fail to
+reject it.
+
+The p-value of the test is 2.2e-16, which is less than the significance
+level alpha = 0.05. We can conclude that camopulin average tumor size is
+significantly different from placebo average tumor size with a p-value =
+2.2e-16.
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the
+null hypothesis, so we reject the null hypothsisis and accept the
+alternate hypothesis.
+
+\end{document}
