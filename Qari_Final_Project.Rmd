@@ -53,23 +53,28 @@ Introduction: Pymaceuticals Inc., a fictional burgeoning pharmaceutical company 
 ### Research question:
 ### You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
 
-Question 1: Is Capomulin more effective than the three other drugs in the dataset? 
+Question 1: Is Capomulin more or less effective in reducing the tumor size than Infubinol, or Ketapril drugs categories? 
 
-Question 2: Is there a correlation between the age, weight and the effectiveness of capomulin?
+Question 2: Is there a correlation between the age and the tumor size growth for each drug category?
 
-Null Hyothesis: There is no difference between the effectiveness of the four drug regimens.
+Question 3: Is there a correlation between the weight and the tumor size growth for each drug category?
 
-Alternate Hyothesis: Capomulin is more effective than the other three drug regimens on treating SCC tumor growth.
+Hypothesis Test:
 
+Null Hypothesis: There is no difference between the mean percent change in tumor volume for the four drug categories.
+
+Alternate Hypothesis: There is a difference between the mean percent change in tumor volume for the four drug categories.
 
 Approach for answering the research question will be: 
 
+1- Calculate the mean percent change in tumor volume for the four drug categories.
 
-1- Perform linear regression to study the correlation between various variables and calculating the correlation coefficient.
+2- Perform the Hypothesis test to find out whether or not the difference exist between the mean tumor size for all four drug categories.
 
-2- And finally compare the four population against each other.
+3- Perform linear regression to study the correlation between various variables by calculating the correlation coefficient.
 
-3- Perform Hypothesis testing 
+4- Finally analyze the results to find out if Capomulin more or less effective in reducing the tumor size of sample mice than Infubinol, or Ketapril drugs categories.
+
 
 ### Cases:
 ### What are the cases? How many different drug treatments are there? How many total sample size as well as the sample size by drug treatments are there?
@@ -87,7 +92,7 @@ I import the data into my .Rmd file from github.
 ### Type of study:
 ### What type of study is this (observational/experiment)?
 
-Answer: This is a experimental study.A group of 249 mice were monitored after administration of a variety of drug regimens over a 45-day treatment period. The impact of Capomulin on tumor growth, metastasis and survival rates were monitored, along with Infubinol, Ketapril, and Placebo.
+Answer: This is an experimental study.A group of 249 mice were monitored after administration of a variety of drug regimens over a 45-day treatment period. The impact of Capomulin on tumor growth, metastasis and survival rates were monitored, along with Infubinol, Ketapril, and Placebo.
 
 
 ### Data Source:
@@ -311,7 +316,7 @@ ketapril_df <- filter(merge_df, Drug_Regimen == "Ketapril")
 placebo_df <- filter(merge_df, Drug_Regimen == "Placebo")
 
 
-head(capomulin_df)
+view(capomulin_df)
 ```
 
 ### To generate a scatter plot of average tumor volume vs. mouse weight for all mice in the Capomulin regimen.
@@ -702,6 +707,14 @@ R is a measure of any linear trend between two variables. The value of r ranges 
 
 From the plot above, the value of R=0.88 shows strong linear relationship.
 
+### Calculating R Square for Capomulin drug 
+
+```{r}
+lrModel <- lm(Tumor_Volume_mm3~Average_weight, data=capo_df)
+summary(lrModel)
+```
+This shows 76.86% of the variation in the Tumor size can be explained by Average_weight for Capomulin drug 
+
 
 ### Testing the correlation between average age and Tumor size for ketapril drug regimen:
 
@@ -726,6 +739,30 @@ R is a measure of any linear trend between two variables. The value of r ranges 
 
 From the plot above, the value of R=0.28 shows week linear relationship.
 
+### Calculating R Square for ketapril drug 
+
+```{r}
+lrModel <- lm(Tumor_Volume_mm3~Average_age, data=keta_df)
+summary(lrModel)
+```
+
+This shows 07.63% of the variation in the Tumor size can be explained by Average_age for ketapril drug 
+
+### Performing Multiple Linear regression for Capomulin Drug Regemin.
+
+```{r}
+#fit regression model
+model <- lm(Tumor_Volume_mm3~Average_weight+Average_age, data=capo_df)
+
+#view model summary
+summary(model)
+
+```
+The coefficient of determination (commonly denoted R2) is the proportion of the variance in the response variable that can be explained by the explanatory variables in a regression model.
+
+The R-squared of the model (shown near the very bottom of the output) turns out to be 0.7739
+
+This means that 77.39% of the variation in the Tumor size can be explained by the weight and the number of age of mice.
 
 ### Preparing Data for Capomulin and Placebo Statistical analysis
 
