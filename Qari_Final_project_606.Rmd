@@ -11,7 +11,7 @@ Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of S
 
 
 ### Research question:
-### You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
+You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
 
 Question 1: Is Capomulin more or less effective in reducing the tumor size than Infubinol, or Ketapril drugs categories? 
 
@@ -374,11 +374,33 @@ head(test_df)
 Compute some summary statistics (count, mean and sd) of the variable weight organized by groups:
 
 ```{r}
+
+# Summarize
 new_df %>%
-   group_by(Drug_Regimen) %>%
-  get_summary_stats(percent_change_Tumor_Volume, type = "mean_sd")
+group_by(Drug_Regimen) %>%
+  summarise(
+    n = n(),
+    max = max(percent_change_Tumor_Volume),
+    min = min(percent_change_Tumor_Volume),
+    mean = mean(percent_change_Tumor_Volume),
+    median = median(percent_change_Tumor_Volume),
+    sd = sd(percent_change_Tumor_Volume),
+    quan_25th = quantile(percent_change_Tumor_Volume, 0.25),
+    quan_75th = quantile(percent_change_Tumor_Volume, 0.75)
+  )
 ```
 ### Visualization
+
+```{r}
+
+# Color by groups
+ggsummarystats(
+  new_df, x = "Drug_Regimen", y = "percent_change_Tumor_Volume", 
+  ggfunc = ggboxplot, add = "jitter",
+  color = "Drug_Regimen", palette = "npg"
+  )
+```
+
 
 Create a box plot of percent_change_Tumor_Volume by Drug_Regimen:
 
@@ -521,7 +543,7 @@ model <- lm(Tumor_Volume_mm3~Weight_g+Age_months, data=capo_df)
 #view model summary
 summary(model)
 
-#By looking at the coefficients, it seems as though weight is accounting for most of the variance (B = 1.76, p<.05). Age is not a significant predictor of tumor size (B = .053, p = .481).
+#By looking at the coefficients, it seems as though weight is accounting for most of the variance (B = 1.76, p=1.49e-08, p<.05). Age is not a significant predictor of tumor size (B = .053, p = .481).
 ```
 
 Residuals:
@@ -543,5 +565,42 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 This section displays the estimated coefficients of the regression model. We can use these coefficients to form the following estimated regression equation:
 
 Tumor_Volume_mm3 = 0.48591 + 1.76129*Weight_g + 0.05303*Age_months
+
+
+
+### Calculating R Square for weight 
+
+```{r}
+wt_Model <- lm(Tumor_Volume_mm3~Weight_g, data=new_df)
+summary(wt_Model)
+```
+
+### Visualizing the Data:
+ 
+```{r}
+
+ggscatter(new_df, x = "Tumor_Volume_mm3", y = "Weight_g", col="red",
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Tumor Size mm3", ylab = "Weight_g")
+```
+
+### Calculating R Square for age
+
+```{r}
+age_Model <- lm(Tumor_Volume_mm3~Age_months, data=new_df)
+summary(age_Model)
+```
+
+### Visualizing the Data:
+ 
+```{r}
+
+ggscatter(new_df, x = "Tumor_Volume_mm3", y = "Age_months", col="blue",
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Tumor Size mm3", ylab = "Age")
+```
+
 
 
