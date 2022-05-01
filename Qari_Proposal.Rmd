@@ -47,29 +47,34 @@ results_df <- read.delim("https://raw.githubusercontent.com/rfpoulos/pymaceutica
 head(results_df)
 ```
 
-Introduction: Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals.They have provided the data to test the efficacy of potential drug treatments for squamous cell carcinoma. In this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor growth, kind of skin cancer, were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured.The objective is to analyze the data to show how four treatments (Capomulin, Infubinol, Ketapril, and Placebo) compare.
+### Introduction: 
+Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals.They have provided the data to test the efficacy of potential drug treatments for squamous cell carcinoma. In this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor growth, kind of skin cancer, were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured.The objective is to analyze the data to show how four treatments (Capomulin, Infubinol, Ketapril, and Placebo) compare.
+
 
 
 ### Research question:
-### You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
+You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
 
-Question 1: Is Capomulin more effective than the three other drugs in the dataset? 
+Question 1: Is Capomulin more or less effective in reducing the tumor size than Infubinol, or Ketapril drugs categories? 
 
-Question 2: Is there a correlation between the age, weight and the effectiveness of capomulin?
+Question 2: Is there a correlation between the age, weight and the tumor size growth for each drug category?
 
-Null Hyothesis: There is no difference between the effectiveness of the four drug regimens.
 
-Alternate Hyothesis: Capomulin is more effective than the other three drug regimens on treating SCC tumor growth.
+### Hypothesis Test
 
+Null Hypothesis: There is no difference between the mean percent change in tumor volume for the four drug categories.
+
+Alternate Hypothesis: There is a difference between the mean percent change in tumor volume for the four drug categories.
 
 Approach for answering the research question will be: 
 
+1- Calculate the mean percent change in tumor volume for the four drug categories.
 
-1- Perform linear regression to study the correlation between various variables and calculating the correlation coefficient.
+2- Perform the Hypothesis test to find out whether or not the difference exist between the mean tumor size for all four drug categories.
 
-2- And finally compare the four population against each other.
+3- Perform linear regression to study the correlation between various variables by calculating the correlation coefficient.
 
-3- Perform Hypothesis testing 
+4- Finally analyze the results to find out if Capomulin more or less effective in reducing the tumor size of sample mice than Infubinol, or Ketapril drugs categories.
 
 
 ### Cases:
