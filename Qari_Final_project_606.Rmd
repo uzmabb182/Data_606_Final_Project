@@ -274,7 +274,7 @@ head(capo_df)
 ```{r}
 # Calculating the percent change in Tumor volume
 capo_df <- capo_df %>% 
-  mutate(percent_change_Tumor_Volume = ((Tumor_Volume_mm3-45)/45)*100)
+  mutate(percent_change_Tumor_Volume = ((Tumor_Volume_mm3-45)/45))
 head(capo_df)
 ```
 
@@ -289,7 +289,7 @@ infu_df <- select(infubinol_df, Mouse_Id, Drug_Regimen, Timepoint, Tumor_Volume_
 
 # Calculating the percent change in Tumor volume
 infu_df <- infu_df %>% 
-  mutate(percent_change_Tumor_Volume = ((Tumor_Volume_mm3-45)/45)*100)
+  mutate(percent_change_Tumor_Volume = ((Tumor_Volume_mm3-45)/45))
 
 head(infu_df)
 ```
@@ -305,7 +305,7 @@ keta_df <- select(ketapril_df, Mouse_Id, Drug_Regimen, Timepoint, Tumor_Volume_m
 
 # Calculating the percent change in Tumor volume
 keta_df <- keta_df %>% 
-  mutate(percent_change_Tumor_Volume = ((Tumor_Volume_mm3-45)/45)*100)
+  mutate(percent_change_Tumor_Volume = ((Tumor_Volume_mm3-45)/45))
 
 head(keta_df)
 ```
@@ -338,19 +338,36 @@ head(new_df)
 ```
 
 ```{r}
-new_df$percent_change_Tumor_Volume = round(new_df$percent_change_Tumor_Volume, digit=2)
+#new_df$percent_change_Tumor_Volume = round(new_df$percent_change_Tumor_Volume, digit=2)
 head(new_df)
 ```
 
 
+### Comparing the percent change in tumor volumn size for each drug category
 
 ```{r}
-ggplot(new_df, aes(x=Drug_Regimen, y=percent_change_Tumor_Volume, fill=Drug_Regimen)) + 
-       geom_bar(stat="identity") +
-       coord_flip()
+test_df <- select(new_df, Drug_Regimen, percent_change_Tumor_Volume) %>%
+  group_by(Drug_Regimen) %>%
+ summarise(percent_change_Tumor_Volume = mean(percent_change_Tumor_Volume, na.rm=TRUE))
+
+head(test_df)
 ```
 
-### When we want to compare the means of three or more samples, One Way Variance (Anova) is the most appropriate test to use.
+
+
+
+```{r}
+# plot mean salaries
+ggplot(test_df, 
+       aes(x = percent_change_Tumor_Volume, 
+           y = Drug_Regimen, 
+           fill=Drug_Regimen)) +
+  geom_bar(stat = "identity")
+```
+
+
+
+### To compare the means of three or more samples, One Way Variance (Anova) is the most appropriate test to use.
 
 
 ### Assumptions
@@ -361,13 +378,8 @@ No significant outliers in any cell of the design
 Normality. the data for each design cell should be approximately normally distributed.
 Homogeneity of variances. The variance of the outcome variable should be equal in every cell of the design.
 
-```{r}
-test_df <- select(new_df, Drug_Regimen, percent_change_Tumor_Volume) %>%
-  group_by(Drug_Regimen) %>%
- summarise(percent_change_Tumor_Volume = mean(percent_change_Tumor_Volume, na.rm=TRUE))
 
-head(test_df)
-```
+
 
 ### Summary statistics
 
@@ -392,7 +404,9 @@ group_by(Drug_Regimen) %>%
 ### Visualization
 
 ```{r}
-
+library(tidyverse)
+library(rstatix)
+library(ggpubr)
 # Color by groups
 ggsummarystats(
   new_df, x = "Drug_Regimen", y = "percent_change_Tumor_Volume", 
@@ -413,12 +427,18 @@ boxplot(new_df$percent_change_Tumor_Volume~new_df$Drug_Regimen,
 ```
 
 ### Analysis for the box plots: 
-We can see the drug categories on the x_axis and percent change in tumor size on the y_axis.
+
+The drug categories represented on the x_axis and percent change in tumor size on the y_axis.
+
 Infubinol drug category has one datapoint indicating the outlier. 
-Infubinol and Ketapril drug category shows that the median and mean are closely alligned, and data is normally distributed, and we can ignore the outlier in Infubinol drug category.
-Ketapril drug category has more variance than the Infubinol drug category.
-However, Capomulin drug category shows that the mean < median in the Capomulin drug category, making it left skewed. Also, the percent change is tumor size is below zero.
-So, Capomulin drug category appears to be different than Infubinol and Ketapril drug category, which is a indication that we will find the differnce between Capomulin drug category and the other two categories.
+
+Infubinol and Ketapril drug category shows that the median and mean are closely alligned, which shows data is normally distributed, and we can ignore the outlier in Infubinol drug category.
+
+Ketapril drug category has more variance of data points than the Infubinol drug category.
+
+However, the mean < median in the Capomulin drug category, making it left skewed. Also, the percent change is tumor size is below zero, showing that the Capomulin drug is effective in reducing the size of tumor.
+
+Since, Capomulin drug category appears to be different than Infubinol and Ketapril drug category, which is a indication that we will find the differnce between means of Capomulin drug and the other two categories.
 
 ### Check assumptions
 ### Outliers
@@ -475,11 +495,12 @@ plot(model, 1)
 
 In the plot above, there is no evident relationships between residuals and fitted values (the mean of each groups), which is good. So, we can assume the homogeneity of variances.
 
-# Step 1: Setup Null Hypothesis and Alternate Hypothesis
-# H0 = mu0 = mu01 = mu02(There is no difference between the mean percent change in tumor volume for the four drug categories.)
-# H1 = Not all means are equal
+### Step 1: Setup Null Hypothesis and Alternate Hypothesis
 
-Alpha = 0.05
+### H0 = mu0 = mu01 = mu02 = mu03 (i.e.,There is no difference between the mean percent change in tumor volume for the four drug categories.)
+### H1 = Not all means are equal
+
+### Alpha = 0.05
 
 
 ### Computation for Anova Test
@@ -508,9 +529,15 @@ p-Value: 2.2e-16, this tells weather we found significance difference or not.The
 
 ### Conclusion:
 
+The F-value in an ANOVA is calculated as: variation between sample means / variation within the samples.
+The higher the F-value in an ANOVA, the higher the variation between sample means relative to the variation within the samples.
+The higher the F-value, the lower the corresponding p-value.
+
+Since the p-value is below a threshold (α = .05), we can reject the null hypothesis of the ANOVA and conclude that there is a statistically significant difference between group means.
+
 Therefore, we can reject the null hypothesis that there is no difference between the means in the data sample.
 
-We are not sure about which category mean is different, so we perform Post-hoc tests to determine that.
+But we are not sure about which category mean is different, so we perform Post-hoc tests to determine that.
 
 
 ### Post-hoc tests:
@@ -521,20 +548,34 @@ A significant one-way ANOVA is generally followed up by Tukey post-hoc tests to 
 ```{r}
 TukeyHSD(table)
 ```
+
+### Report TukeyHSD Results:
+
 when p-adj < p-value, there is a significant difference between the two categories mean.
-We are 95% confidence that the true mean lies between the lwr and upr bounds.
+
+We are 95% confident that the true mean lies between the lwr and upr bounds of confidence Interval.
+
+The p-Value for Infubinol-Capomulin, Ketapril-Capomulin, Placebo-Capomulin is less than alpha=0.05 that shows there is significant difference between the means of these categories.
+
+The visualization below shows the difference in mean between the two categories in the middle of each bar.
+
+Both end limits on the each bar shows the upper and lower limits of confidence intervals.
+
 
 ```{r}
 plot(TukeyHSD(table), col= rainbow(4))
 ```
 
 
+###=====================================================================================
 
-#========================================================
+### correlation between the age, weight and the tumor size growth for each drug category?
 
 ```{r}
 head(capo_df)
 ```
+
+### Applying Regression Model for Analyzing Correlation between Age_months, weight_g and Tumor_Volume_mm3
 
 ```{r}
 #fit regression model
@@ -568,7 +609,7 @@ Tumor_Volume_mm3 = 0.48591 + 1.76129*Weight_g + 0.05303*Age_months
 
 
 
-### Calculating R Square for weight 
+### Applying Regression Model for Analyzing Correlation between Tumor_Volume_mm3 and weight 
 
 ```{r}
 wt_Model <- lm(Tumor_Volume_mm3~Weight_g, data=new_df)
@@ -585,7 +626,7 @@ ggscatter(new_df, x = "Tumor_Volume_mm3", y = "Weight_g", col="red",
           xlab = "Tumor Size mm3", ylab = "Weight_g")
 ```
 
-### Calculating R Square for age
+### Applying Regression Model for Analyzing Correlation between Tumor_Volume_mm3 and Age_months
 
 ```{r}
 age_Model <- lm(Tumor_Volume_mm3~Age_months, data=new_df)
