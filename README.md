@@ -1,7 +1,6 @@
 # Data_606_Final_Project:
-![title1](visual_charts/title1.jpg)
+![title1](/visual_charts/title1.jpg)
 
-![alt text](visual_charts/title2.jpg)
 This is an experimental study where a group of 249 mice were monitored after administrating a variety of drug regimens over a 45-day treatment period. The impact of Capomulin drug on tumor growth, and survival rates were monitored, along with Infubinol, Ketapril, and Placebo.
 - There are 10 different drug treatments. 
 - Four drug treatments: Capomulin, Infubinol, Ketapril, and - Placebo.
@@ -32,11 +31,11 @@ This is an experimental study where a group of 249 mice were monitored after adm
 
 - The initial Tumor Volume at starting timepoint zero is 45 mm3 for all mice.
 
-![bar plot](visual_charts/barplot.png)
+![bar plot](/visual_charts/barplot.png)
 
 You can see the negative bar showing the reduce size of tumor volume.
 
-![box plot](visual_charts/boxplot.png)
+![box plot](/visual_charts/boxplot.png)
 
 # Analysis for the box plots: 
 
@@ -54,7 +53,7 @@ Since Capomulin appears to be different than Infubinol and Ketapril, this is an 
 
 # QQ plot and Shapiro-Wilk test of normality:
 
-![assumptions](visual_charts/assumption_test.png)
+![assumptions](/visual_charts/assumption_test.png)
 
 ## To compare the means of three or more samples, One Way Variance (Anova) is the most appropriate test to use.
 
@@ -67,9 +66,9 @@ The ANOVA test makes a few assumptions about the data:
 - Normality. the data for each group should be approximately normally distributed.
 - Homogeneity of variances. The variance of the outcome variable should be equal in every group.
 
-![shapiro test](visual_charts/shapiro_wilktest.png)
+![shapiro test](/visual_charts/shapiro_wilktest.png)
 
-![grp_assumption](visual_charts/norm_grp_test.png)
+![grp_assumption](/visual_charts/norm_grp_test.png)
 
 ## Performing a Shapiro-Wilk test of normality
 
@@ -80,11 +79,11 @@ The score were normally distributed (p > 0.05) for each group, as assessed by Sh
 
 ## Homogeneity of variance assumption
 
-![homogeneity test](visual_charts/homog_test.png)
+![homogeneity test](/visual_charts/homog_test.png)
 
 In the plot above, there is no evident relationships between residuals and fitted values (the mean of each groups), which is good. So, we can assume the homogeneity of variances.
 
-![hypothesis test](visual_charts/hypothsis_test.png)
+![hypothesis test](/visual_charts/hypothsis_test.png)
 
 ### Report: 
 Degree of freedom: 3, since we have 4 categories, so 4-1 =3 degree of freedom
@@ -110,7 +109,7 @@ But we are not sure about which category mean is different, so we perform Post-h
 
 # Post-hoc Test:
 
-![post hoc calc](visual_charts/post_hoc_calc.png)
+![post hoc calc](/visual_charts/post_hoc_calc.png)
 
 A significant one-way ANOVA is generally followed up by Tukey post-hoc tests to perform multiple pairwise comparisons between groups.
 
@@ -132,7 +131,7 @@ Both end limits on each bar shows the upper and lower limits of confidence inter
 
 # Regression Model for Analyzing Correlation between Age, weight and Tumor_Volume_mm3
 
-![alt text](visual_charts/lm_calc.png)
+![alt text](/visual_charts/lm_calc.png)
 
 When building regression models, we hope that this p-value is less than some significance level because it indicates that the predictor variables are actually useful for predicting the value of the response variable.
 
@@ -154,14 +153,14 @@ Adjusted R-squared: This is a modified version of R-squared that has been adjust
 
 F-statistic: This indicates whether the regression model provides a better fit to the data than a model that contains no independent variables. In essence, it tests if the regression model as a whole is useful.
 
-![lm wt](visual_charts/lm_wt.png)
+![lm wt](/visual_charts/lm_wt.png)
 
 Multiple R-Squared: This is known as the coefficient of determination. It tells us the proportion of the variance in the response variable that can be explained by the predictor variables. This value ranges from 0 to 1. The closer it is to 1, the better the predictor variables can predict the value of the response variable.
 
 p-value: This is the p-value that corresponds to the F-statistic. If this value is less than some significance level (e.g. 0.05), then the regression model fits the data better than a model with no predictors.
 
 
-![lm age](visual_charts/lm_age.png)
+![lm age](/visual_charts/lm_age.png)
 
 
 # Final Conclusion:
