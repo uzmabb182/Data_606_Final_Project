@@ -1,5 +1,5 @@
 ---
-title: "Qari_Final_Project_V2.Rmd"
+title: "Final Project Data 606.Rmd"
 author: "Mubashira Qari"
 date: "April 30, 2022"
 output: html_document
@@ -7,11 +7,10 @@ output: html_document
 
 ### Overview: 
 
-Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals.They have provided the data to test the efficacy of potential drug treatments for squamous cell carcinoma. In this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor growth, kind of skin cancer, were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured.The objective is to analyze the data to show how four treatments (Capomulin, Infubinol, Ketapril, and Placebo) compare.
+Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals. They have provided the data to test the efficacy of potential drug treatments for squamous cell carcinoma. In this study, 249 mice identified with Squamous cell carcinoma (SCC) tumor growth, kind of skin cancer, were treated through a variety of drug regimens. Over the course of 45 days, tumor development was observed and measured. The objective is to analyze the data to show how four treatments (Capomulin, Infubinol, Ketapril, and Placebo) compare.
 
 
 ### Research question:
-You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.
 
 Question 1: Is Capomulin more or less effective in reducing the tumor size than Infubinol, or Ketapril drugs categories? 
 
@@ -28,7 +27,7 @@ Approach for answering the research question will be:
 
 1- Calculate the mean percent change in tumor volume for the four drug categories.
 
-2- Perform the Hypothesis test to find out whether or not the difference exist between the mean tumor size for all four drug categories.
+2- Perform the Hypothesis test to find out whether the difference exists between the mean tumor size for all four drug categories.
 
 3- Perform linear regression to study the correlation between various variables by calculating the correlation coefficient.
 
@@ -36,36 +35,40 @@ Approach for answering the research question will be:
 
 
 ### Cases:
-### What are the cases? How many different drug treatments are there? How many total sample size as well as the sample size by drug treatments are there?
 
-Answer: The metadata_df contain 249 unique mouse id and so are the number of cases that treated with variety of drug regimem .The results_df dataset holds the tumor growth measurments observed for each Mouse ID and carries 1,893 rows results. There are 10 different drug treatments. The total sample size of mouse_id for four treatments (Capomulin, Infubinol, Ketapril, and Placebo) is 100 and the sample size of mouse_id by drug treatments is 25 each.
+### What are the cases? How many different drug treatments are there? How many total samples size as well as the sample size by drug treatments are there?
+
+Answer: The metadata_df contain 249 unique mouse id and so are the number of cases that treated with variety of drug regimen. The results_df dataset holds the tumor growth measurements observed for each Mouse ID and carries 1,893 rows results. There are 10 different drug treatments. The total sample size of mice for four treatments (Capomulin, Infubinol, Ketapril, and Placebo) is 100 and the sample size of mice by drug treatments is 25 each.
 
 
 ### Data collection:
+
 ### Describe the method of data collection.
 
 Answer: Data is collected by the fictitious pharmaceutical company who was testing the efficacy of potential drug treatments for squamous cell carcinoma.
-I import the data into my .Rmd file from github.
+I import the data into Rmd file from GitHub.
 
 
 ### Type of study:
+
 ### What type of study is this (observational/experiment)?
 
-Answer: This is an experimental study.A group of 249 mice were monitored after administration of a variety of drug regimens over a 45-day treatment period. The impact of Capomulin on tumor growth, metastasis and survival rates were monitored, along with Infubinol, Ketapril, and Placebo.
+Answer: This is an experimental study. A group of 249 mice were monitored after administration of a variety of drug regimens over a 45-day treatment period. The impact of Capomulin on tumor growth, metastasis and survival rates were monitored, along with Infubinol, Ketapril, and Placebo.
 
 
 ### Data Source:
+
 ### If you collected the data, state self-collected. If not, provide a citation/link.
 
 Answer: The citation and data collection links are as follows. 
 
-In my search for the experimental datasets, I found the Mouse_metadata and the Study_results on the GitHub link provided below:
+In my search for the experimental datasets, I found the mouse metadata and the Study results on the GitHub link provided below:
 
 https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Mouse_metadata.csv
 
 https://raw.githubusercontent.com/rfpoulos/pymaceuticals/master/data/Study_results.csv
 
-Upon further research in finding the original source of the the dataset, I found that these datasets are provided by Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals. Below is the link for the original source of the datasets.
+Upon further research in finding the original source of the dataset, I found that these datasets are provided by Pymaceuticals Inc., a fictional burgeoning pharmaceutical company based out of San Diego, CA, specializes in drug-based, anti-cancer pharmaceuticals. Below is the link for the original source of the datasets.
 
 
 https://c-l-nguyen.github.io/web-design-challenge/index.html
@@ -73,9 +76,10 @@ https://c-l-nguyen.github.io/web-design-challenge/index.html
 
 
 ### Response
+
 ### What is the response variable, and what type is it (numerical/categorical)?
 
-Answer: The response variable is the size of tumor, "Tumor.Volume..mm3." and it holds a numerical data.
+Answer: The response variable is the size of tumor, "Tumor.Volume.mm3." and it holds a numerical data.
 
 ### Explanatory
 
@@ -83,9 +87,22 @@ What is the explanatory variable, and what type is it (numerical/categorical)?
 
 Answer: The explanatory variable is the "Drug.Regimen" and it holds a categorical data and "Timepoint" which holds numerical data. The 'Timepoint' unit is 'days'.
 
+### Units of Variables:
+
+Weight(g)
+Age_months(months)
+Timepoint(days) - numerical explanatory variable
+Drug.Regimen - categorical explanatory variable
+Tumor.Volume(mm3) - response variable
+Metastatic.Sites(satges of the spread of tumor)
+
+### The initial Tumor Volume for starting point zero is 45 mm3 for all mice.
+### Over the course of 45 days, tumor development was observed and measured.
+
 ### Relevant summary statistics: (Tables and Charts)
 
-Provide summary statistics relevant to your research question. For example, if you’re comparing means across groups provide means, SDs, sample sizes of each group. This step requires the use of R, hence a code chunk is provided below. Insert more code chunks as needed.
+Provide summary statistics relevant to your research question. For example, if you’re comparing means across groups provide means, SDs, sample sizes of each group. This step requires the use of R; hence a code chunk is provided below. Insert more code chunks as needed.
+
 
 ### Libraries Imported
 
@@ -366,21 +383,6 @@ ggplot(test_df,
 ```
 
 
-
-### To compare the means of three or more samples, One Way Variance (Anova) is the most appropriate test to use.
-
-
-### Assumptions
-The ANOVA test makes the following assumptions about the data:
-
-Independence of the observations. Each subject should belong to only one group. There is no relationship between the observations in each group. Having repeated measures for the same participants is not allowed.
-No significant outliers in any cell of the design
-Normality. the data for each design cell should be approximately normally distributed.
-Homogeneity of variances. The variance of the outcome variable should be equal in every cell of the design.
-
-
-
-
 ### Summary statistics
 
 Compute some summary statistics (count, mean and sd) of the variable weight organized by groups:
@@ -438,7 +440,21 @@ Ketapril drug category has more variance of data points than the Infubinol drug 
 
 However, the mean < median in the Capomulin drug category, making it left skewed. Also, the percent change is tumor size is below zero, showing that the Capomulin drug is effective in reducing the size of tumor.
 
-Since, Capomulin drug category appears to be different than Infubinol and Ketapril drug category, which is a indication that we will find the differnce between means of Capomulin drug and the other two categories.
+Since Capomulin drug category appears to be different than Infubinol and Ketapril drug category, which is an indication that we will find the difference between means of Capomulin drug and the other two categories.
+
+#=============================================================================================================================
+
+### To compare the means of three or more samples, One Way Variance (ANOVA) is the most appropriate test to use.
+
+
+### Assumptions
+The ANOVA test makes the following assumptions about the data:
+
+Independence of the observations. Each subject should belong to only one group. There is no relationship between the observations in each group. Having repeated measures for the same participants is not allowed.
+No significant outliers in any cell of the design
+Normality. the data for each design cell should be approximately normally distributed.
+Homogeneity of variances. The variance of the outcome variable should be equal in every cell of the design.
+
 
 ### Check assumptions
 ### Outliers
@@ -464,6 +480,14 @@ model  <- lm(percent_change_Tumor_Volume ~ Drug_Regimen, data = new_df)
 ggqqplot(residuals(model),col="blue")
 ```
 
+```{r}
+# Compute Shapiro-Wilk test of normality
+shapiro_test(residuals(model))
+```
+### Conclusion:
+
+In the QQ plot, as all the points fall approximately along the reference line, we can assume normality. This conclusion is supported by the Shapiro-Wilk test. The p-value is not significant (p = 0.6), so we can assume normality.
+
 ### Check normality assumption by groups
 
 Computing Shapiro-Wilk test for each group level. If the data is normally distributed, the p-value should be greater than 0.05.
@@ -483,9 +507,11 @@ QQ plot draws the correlation between a given data and the normal distribution.
 ggqqplot(new_df, "percent_change_Tumor_Volume", facet.by = "Drug_Regimen", col="red")
 ```
 
+### Conclusion:
+
 All the points fall approximately along the reference line, for each cell. So we can assume normality of the data.
 
-### Homogneity of variance assumption
+### Homogeneity of variance assumption
 
 The residuals versus fits plot can be used to check the homogeneity of variances.
 
@@ -493,17 +519,21 @@ The residuals versus fits plot can be used to check the homogeneity of variances
 plot(model, 1)
 ```
 
-In the plot above, there is no evident relationships between residuals and fitted values (the mean of each groups), which is good. So, we can assume the homogeneity of variances.
+### Conclusion:
+
+In the plot above, there is no evident relationships between residuals and fitted values (the mean of each group), which is good. So, we can assume the homogeneity of variances.
 
 ### Step 1: Setup Null Hypothesis and Alternate Hypothesis
 
-### H0 = mu0 = mu01 = mu02 = mu03 (i.e.,There is no difference between the mean percent change in tumor volume for the four drug categories.)
+### H0 = mu0 = mu01 = mu02 = mu03 (i.e., There is no difference between the mean percent change in tumor volume for the four drug categories.)
+
 ### H1 = Not all means are equal
 
 ### Alpha = 0.05
 
 
-### Computation for Anova Test
+### Computation for ANOVA Test
+
 
 ```{r}
 #result_aov <- new_df %>% anova_test(percent_change_Tumor_Volume ~ Drug_Regimen)
@@ -525,7 +555,7 @@ Degree of freedom: 3, since we have 4 categories, so 4-1 =3 degree of freedom
 Sum of Squares: 53104
 Mean Sum of Squares: 17701
 F-Statistics: 69.737, F(3, 96) = 69.74
-p-Value: 2.2e-16, this tells weather we found significance difference or not.The p-value less than alpha=0.05 shows that we found the difference in at least two of the means in the data sample. And that is what we suspected from the boxplot analysis.
+p-Value: 2.2e-16, this tells weather we found significance difference or not. The p-value less than alpha=0.05 shows that we found the difference in at least two of the means in the data sample. And that is what we suspected from the boxplot analysis.
 
 ### Conclusion:
 
@@ -540,7 +570,7 @@ Therefore, we can reject the null hypothesis that there is no difference between
 But we are not sure about which category mean is different, so we perform Post-hoc tests to determine that.
 
 
-### Post-hoc tests:
+### Post-hoc test:
 
 A significant one-way ANOVA is generally followed up by Tukey post-hoc tests to perform multiple pairwise comparisons between groups. Key R function: tukey_hsd() [rstatix].
 
@@ -557,9 +587,14 @@ We are 95% confident that the true mean lies between the lwr and upr bounds of c
 
 The p-Value for Infubinol-Capomulin, Ketapril-Capomulin, Placebo-Capomulin is less than alpha=0.05 that shows there is significant difference between the means of these categories.
 
+The p-Value for Infubinol-Capomulin, Ketapril-Capomulin, Placebo-Capomulin is less than alpha=0.05 that shows there is significant difference between the means of these categories.
+
+Thus, Capomulin more effective in reducing the tumor size than Infubinol, or Ketapril drugs categories. 
+
 The visualization below shows the difference in mean between the two categories in the middle of each bar.
 
-Both end limits on the each bar shows the upper and lower limits of confidence intervals.
+Both end limits on each bar shows the upper and lower limits of confidence intervals.
+
 
 
 ```{r}
@@ -587,7 +622,7 @@ summary(model)
 #By looking at the coefficients, it seems as though weight is accounting for most of the variance (B = 1.76, p=1.49e-08, p<.05). Age is not a significant predictor of tumor size (B = .053, p = .481).
 ```
 
-Residuals:
+### Residuals:
     Min      1Q  Median      3Q     Max 
 -7.2433 -0.7903  0.1667  1.5253  4.8761 
 
@@ -595,7 +630,7 @@ This section displays a summary of the distribution of residuals from the regres
 
 The minimum residual was -7.2433, the median residual was 0.1667 and the max residual was 4.8761.
 
-Coefficients:
+### Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  0.48591    4.32578   0.112    0.912    
 Weight_g     1.76129    0.20298   8.677 1.49e-08 ***
@@ -605,16 +640,43 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 This section displays the estimated coefficients of the regression model. We can use these coefficients to form the following estimated regression equation:
 
-Tumor_Volume_mm3 = 0.48591 + 1.76129*Weight_g + 0.05303*Age_months
+### Tumor_Volume_mm3 = 0.48591 + 1.76129*Weight_g + 0.05303*Age_months
+
+Estimate: The estimated coefficient. This tells us about the average increase in the response variable associated with a one unit increase in the predictor variable, assuming all other predictor variables are held constant.
+
+Std. Error: This is the standard error of the coefficient. This is a measure of the uncertainty in our estimate of the coefficient.
+
+t value: This is the t-statistic for the predictor variable, calculated as (Estimate) / (Std. Error).
+
+Residual standard error: This tells us the average distance that the observed values fall from the regression line. The smaller the value, the better the regression model can fit the data.
+
+Multiple R-Squared: This is known as the coefficient of determination. It tells us the proportion of the variance in the response variable that can be explained by the predictor variables. This value ranges from 0 to 1. The closer it is to 1, the better the predictor variables are able to predict the value of the response variable.
+
+Adjusted R-squared: This is a modified version of R-squared that has been adjusted for the number of predictors in the model. It is always lower than the R-squared.
+
+F-statistic: This indicates whether the regression model provides a better fit to the data than a model that contains no independent variables. In essence, it tests if the regression model is useful.
+
+p-value: This is the p-value that corresponds to the F-statistic. If this value is less than some significance level (e.g., 0.05), then the regression model fits the data better than a model with no predictors.
+
+When building regression models, we hope that this p-value is less than some significance level because it indicates that the predictor variables are useful for predicting the value of the response variable.
+
+If we used an alpha level of α = .05 to determine which predictors were significant in this regression model, we’d say that weight has (p=1.49e-08) < is (α = .05) and is statistically significant predictors.
+
+while age (p=0.481) > is (α = .05) and is not statistically significant predictors.
 
 
-
-### Applying Regression Model for Analyzing Correlation between Tumor_Volume_mm3 and weight 
+### Applying Regression Model for Analyzing Correlation between Tumor_Volume_mm3 and weight seperately.
 
 ```{r}
 wt_Model <- lm(Tumor_Volume_mm3~Weight_g, data=new_df)
 summary(wt_Model)
 ```
+
+### Conclusion:
+
+If we used an alpha level of α = .05 to determine which predictors were significant in this regression model, we’d say that weight has (p-value: 6e-16) < is (α = .05) and is statistically significant predictors.
+
+
 
 ### Visualizing the Data:
  
@@ -633,6 +695,11 @@ age_Model <- lm(Tumor_Volume_mm3~Age_months, data=new_df)
 summary(age_Model)
 ```
 
+### Conclusion:
+
+If we used an alpha level of α = .05 to determine which predictors were significant in this regression model, we’d say that age has (p-value: 0.936) > is (α = .05) and is not statistically significant predictors.
+
+
 ### Visualizing the Data:
  
 ```{r}
@@ -642,6 +709,55 @@ ggscatter(new_df, x = "Tumor_Volume_mm3", y = "Age_months", col="blue",
           cor.coef = TRUE, cor.method = "pearson",
           xlab = "Tumor Size mm3", ylab = "Age")
 ```
+### Explanation of One Way ANOVA Variance Test:
 
+ANOVA (or AOV) is short for ANalysis Of VAriance. While it is commonly used for categorical data, because ANOVA is a type of linear model it can be modified to include continuous data. 
+
+ANOVAs are typically referred to as 1-way and 2-way, which is just a way of saying how many groups are being examined in the model. (ANOVAs can be 3-way or more, but these are less common or end up with different names.) A group is the categorical variable that you are evaluating.
+
+ANOVA test determines the difference in mean between two or more independent groups.
+
+ANOVA checks the impact of one or more group by comparing the means of different samples. We can use ANOVA to prove/disprove if all the medication treatments were equally effective or not. 
+
+ANOVA analyzes the variance in the data to look for differences. It does this by considering two sources of variance, the between-group variance and the within-group variance. 
+
+The between-group variation is calculated by comparing the mean of each group with the overall mean of the data—so individual data points don’t matter quite as much as just comparing group means. 
+
+The within-group variation is the variation of each observation from its group mean. 
+
+For both types of variance, a sums of squares (SS) is the numerical metric used to quantify them and this metric simply sums the distances of each point to the mean. 
+
+The ratio of these SS (between SS divided by within SS) results in an F-statistic, which is the test statistic for ANOVA. 
+
+The F-statistic is then combined with the degrees of freedom (df) to arrive at a p-value, which, we are looking for. 
+
+Another way to think of it is that small p-values come from large F-statistics, and large F-statistics suggest that the between group variance is much larger than the within-group variance.
+
+ So, when the differences in group means is larger and yet the groups are not that variable, we tend to have significant factors in our ANOVAs.
+
+A type 1 error is also known as a false positive and occurs when a researcher incorrectly rejects a true null hypothesis. This means that your report that your findings are significant when in fact they have occurred by chance.
+
+The probability of making a type I error is represented by your alpha level (α), which is the p-value below which you reject the null hypothesis. A p-value of 0.05 indicates that we are willing to accept a 5% chance that we are wrong when we reject the null hypothesis.
+
+We can reduce your risk of committing a type I error by using a lower value for p. For example, a p-value of 0.01 would mean there is a 1% chance of committing a Type I error.
+
+However, using a lower value for alpha means that you will be less likely to detect a true difference if one really exists (thus risking a type II error).
+
+
+### Conclusion:
+
+Why is this analysis important?
+
+ANOVA test determines the difference in mean between two or more independent groups. 
+
+ It provides the overall test of equality of group means. 
+
+ It can control the overall type I error rate (i.e., false positive finding)
+
+Limitations of the analysis?
+
+One-way ANOVA can only be used when investigating a single factor and a single dependent variable. When comparing the means of three or more groups, it can tell us if at least one pair of means is significantly different, but it can't tell us which pair.
+
+ANOVA assumes that the data is normally distributed. The ANOVA also assumes homogeneity of variance, which means that the variance among the groups should be approximately equal. ANOVA also assumes that the observations are independent of each other.
 
 
