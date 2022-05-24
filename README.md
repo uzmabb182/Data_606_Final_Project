@@ -1,4 +1,5 @@
 # Data_606_Final_Project:
+## Statistical Analysis of an Experimental Study:
 ![title1](/visual_charts/title1.jpg)
 
 This is an experimental study where a group of 249 mice were monitored after administrating a variety of drug regimens over a 45-day treatment period. The impact of Capomulin drug on tumor growth, and survival rates were monitored, along with Infubinol, Ketapril, and Placebo.
